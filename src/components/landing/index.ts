@@ -1,0 +1,10 @@
+export { Navbar } from "./Navbar";
+export { Hero } from "./Hero";
+export { Problem } from "./Problem";
+export { Features } from "./Features";
+export { HowItWorks } from "./HowItWorks";
+export { Benefits } from "./Benefits";
+export { Testimonials } from "./Testimonials";
+export { FAQ } from "./FAQ";
+export { FinalCTA } from "./FinalCTA";
+export { Footer } from "./Footer";
