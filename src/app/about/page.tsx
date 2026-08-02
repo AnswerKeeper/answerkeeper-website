@@ -96,6 +96,26 @@ export default function AboutPage() {
   
           </div>
         </section>
+        <section className="mt-16 rounded-2xl border border-border bg-surface p-8">
+  <h2 className="font-[family-name:var(--font-outfit)] text-2xl font-semibold text-navy">
+    Meet the Founder
+  </h2>
+
+  <p className="mt-5 leading-relaxed text-navy-muted">
+    Hi, I'm <strong>Ibrahim Shuaib</strong>, the founder of AnswerKeeper.
+  </p>
+
+  <p className="mt-4 leading-relaxed text-navy-muted">
+    I built AnswerKeeper after seeing how many plumbing and HVAC among other home service businesses lose
+    valuable jobs simply because nobody could answer the phone while technicians
+    were busy serving customers.
+  </p>
+
+  <p className="mt-4 leading-relaxed text-navy-muted">
+    My goal is simple: help every home service business capture every customer,
+    every opportunity, and every emergency call—24 hours a day, 7 days a week.
+  </p>
+</section>
       </main>
     );
   }

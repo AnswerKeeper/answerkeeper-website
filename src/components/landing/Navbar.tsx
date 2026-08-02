@@ -41,7 +41,9 @@ export function Navbar() {
 
         <div className="hidden md:flex">
           <a
-            href="/#final-cta"
+            href="https://tally.so/r/D49rpE"
+            target="_blank"
+            rel="noopener noreferrer"
             className="rounded-xl bg-blue px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue/25 transition hover:bg-blue-dark"
           >
             Book a Free Demo
@@ -76,7 +78,9 @@ export function Navbar() {
             ))}
 
             <a
-              href="/#final-cta"
+              href="https://tally.so/r/D49rpE"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setOpen(false)}
               className="mt-2 rounded-xl bg-blue px-4 py-3 text-center text-sm font-semibold text-white"
             >

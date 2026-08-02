@@ -28,19 +28,21 @@ export default function ContactPage() {
             answerkeeper.app@gmail.com
           </p>
 
-          <div className="mt-8">
-            <h2 className="text-xl font-semibold text-navy">
-              Business Hours
-            </h2>
+          <div className="rounded-2xl border border-border bg-surface p-6">
+  <h3 className="font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
+    Support Hours
+  </h3>
 
-            <p className="mt-4 text-navy-muted">
-              Monday – Friday
-            </p>
+  <p className="mt-3 text-sm leading-relaxed text-navy-muted">
+    Monday–Friday<br />
+    9:00 AM–5:00 PM (Central Time)
+  </p>
 
-            <p className="text-navy">
-              9:00 AM – 5:00 PM
-            </p>
-          </div>
+  <p className="mt-4 text-sm leading-relaxed text-navy-muted">
+    <strong>AnswerKeeper answers customer calls 24/7.</strong> These hours
+    apply only to direct support inquiries.
+  </p>
+</div>
 
           <div className="mt-8">
             <h2 className="text-xl font-semibold text-navy">
