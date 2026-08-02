@@ -3,27 +3,27 @@ import { DollarSign, Moon, ShieldCheck, Users } from "lucide-react";
 const benefits = [
   {
     icon: DollarSign,
-    title: "Book more high-value jobs",
-    description:
-      "Emergency and after-hours calls are often your most profitable work. AnswerKeeper keeps those conversations from going cold.",
+    title: "Capture More Service Opportunities",
+description:
+  "Every answered call gives your business a better chance to win new customers before they contact another company.",
   },
   {
     icon: Moon,
-    title: "Cover nights without overtime",
+    title: "Stay Available After Hours",
     description:
-      "Stop paying someone to sit by the phone after dark. Your line stays covered while your team rests for the next job.",
+      "Customers can still reach your business outside normal working hours, helping you capture urgent enquiries and after-hours opportunities.",
   },
   {
     icon: ShieldCheck,
-    title: "Never leave a caller hanging",
+    title: "Deliver a Professional Customer Experience",
     description:
-      "Homeowners get clear answers, booking options, and confirmation—building trust before your truck even arrives.",
+      "Every caller receives a consistent, professional response that reflects the quality of your business from the very first conversation.",
   },
   {
     icon: Users,
-    title: "Free your techs to do the work",
+    title: "Keep Your Team Focused",
     description:
-      "Less phone tag between jobs means faster completions, happier crews, and a shop that scales without chaos.",
+      "Technicians can concentrate on serving customers instead of constantly stopping to answer incoming calls throughout the day.",
   },
 ];
 
@@ -34,10 +34,10 @@ export function Benefits() {
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-              Benefits
+            Built for Home Service Businesses
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-              More jobs booked. Less time chained to the phone.
+            Built Around the Way Plumbing & HVAC Businesses Work
             </h2>
             <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
               AnswerKeeper turns every ring into a captured opportunity—so your

@@ -1,21 +1,21 @@
 const steps = [
   {
     number: "01",
-    title: "Forward your business line",
-    description:
-      "Connect your existing plumbing number in minutes. Missed and after-hours calls route to AnswerKeeper automatically.",
+    title: "Connect Your Business Number",
+description:
+  "Keep the phone number your customers already know. Incoming calls are routed to AnswerKeeper whenever your team can't answer."
   },
   {
     number: "02",
-    title: "AI answers like your shop",
-    description:
-      "Callers hear a professional greeting, get asked the right questions, and receive clear next steps—no robotic dead ends.",
+    title: "Every Customer Gets a Professional Response",
+description:
+  "AnswerKeeper greets callers, collects the information you need, identifies urgent service requests, and keeps the conversation professional from start to finish."
   },
   {
     number: "03",
-    title: "You get the job details instantly",
-    description:
-      "Emergencies trigger SMS alerts. Appointments land on your calendar. Every lead is ready for your tech to take over.",
+    title: "Your Team Takes It From There",
+description:
+  "Service requests, customer details, and appointment information are delivered to your team so they can respond quickly and stay focused on serving customers."
   },
 ];
 
@@ -25,14 +25,13 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-            How it works
+          How AnswerKeeper Works
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-            Up and running in three simple steps
+          From Customer Call to Booked Job in Minutes
           </h2>
           <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
-            No new hardware. No complicated phone system. Just more answered
-            calls and booked jobs.
+          Getting started is simple. Keep your existing business number while AnswerKeeper helps you answer every customer, capture service requests, and keep your technicians informed.
           </p>
         </div>
 

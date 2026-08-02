@@ -3,21 +3,21 @@ import { PhoneMissed, Clock, Wrench } from "lucide-react";
 const problems = [
   {
     icon: PhoneMissed,
-    title: "Missed calls mean missed revenue",
-    description:
-      "When you’re under a sink or between jobs, every unanswered ring is a homeowner who books the next plumber on their list.",
+    title: "Customers Don't Wait",
+description:
+  "When no one answers, most homeowners immediately call another plumbing or HVAC company. Every missed call creates an opportunity for a competitor."
   },
   {
     icon: Clock,
-    title: "Emergencies don’t wait for business hours",
-    description:
-      "Burst pipes and flooded basements happen at 11 PM. If nobody picks up, that high-value job goes to whoever answers first.",
+    title: "Emergency Jobs Happen Anytime",
+description:
+  "Burst pipes, broken air conditioners, and urgent repairs don't wait for office hours. Customers need help immediately, not voicemail."
   },
   {
     icon: Wrench,
-    title: "Answering while working slows you down",
-    description:
-      "Stopping mid-repair to take a call hurts the job in front of you—and still leaves the new lead without a clear next step.",
+    title: "You Can't Be in Two Places at Once",
+description:
+  "While you're helping one customer, new calls continue to come in. Constant interruptions reduce productivity, while missed calls reduce revenue."
   },
 ];
 
@@ -27,14 +27,13 @@ export function Problem() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-            The problem
+          Why Businesses Miss Customers
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-            Your phone rings while your hands are full
+          Every Missed Call Is a Missed Opportunity
           </h2>
           <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
-            Plumbing shops lose jobs not because of skill—but because nobody was
-            free to answer when the customer needed help.
+          Great service doesn't matter if customers can't reach you. For plumbing and HVAC businesses, every unanswered call can become a lost appointment, a lost emergency job, or a customer who hires someone else.
           </p>
         </div>
 

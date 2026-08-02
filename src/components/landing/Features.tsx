@@ -15,39 +15,39 @@ const features: {
 }[] = [
   {
     icon: PhoneCall,
-    title: "24/7 Call Answering",
-    description:
-      "Every call gets a professional answer—nights, weekends, and holidays—so homeowners never hit voicemail when they need a plumber.",
+    title: "Never Miss Another Customer",
+description:
+  "Every incoming call is answered professionally, helping your business capture more customers even when your team is busy on-site.",
   },
   {
     icon: Siren,
-    title: "Emergency Call Detection",
-    description:
-      "AnswerKeeper recognizes urgent language like “flooding,” “no water,” or “gas smell,” then prioritizes the lead for immediate follow-up.",
+    title: "Capture Emergency Service Requests",
+description:
+  "Urgent plumbing and HVAC calls are identified immediately so high-priority jobs receive the attention they need without delay.",
   },
   {
     icon: MessageSquareText,
-    title: "Instant SMS Alerts",
-    description:
-      "The moment a job is captured, your on-call tech gets a text with the caller, address, issue, and urgency—before the customer hangs up.",
+    title: "Keep Your Team Informed",
+description:
+  "Important job details are shared instantly with your technicians, so everyone knows where to go and what the customer needs.",
   },
   {
     icon: CalendarCheck,
-    title: "Appointment Scheduling",
-    description:
-      "Book diagnostics, repairs, and service windows directly into your calendar while the customer is still on the line.",
+    title: "Book More Appointments",
+description:
+  "Turn incoming enquiries into scheduled appointments before customers start calling another company.",
   },
   {
     icon: ClipboardList,
-    title: "Lead Capture",
-    description:
-      "Name, phone, address, problem details, and preferred timing are logged automatically—no sticky notes, no forgotten callbacks.",
+    title: "Every Customer Request Captured",
+description:
+  "Customer details, service requests, and appointment information are organized in one place, making follow-up simple and reliable.",
   },
   {
     icon: HardHat,
-    title: "Works While You're Busy",
-    description:
-      "Stay focused on the job in front of you. AnswerKeeper handles the phone so you don’t lose the next one.",
+    title: "Stay Focused on the Job",
+description:
+  "Finish the work in front of you without worrying about missed calls or interrupted customers. AnswerKeeper keeps your business moving.",
   },
 ];
 
@@ -57,14 +57,13 @@ export function Features() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-            Features
+          Why AnswerKeeper
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-            Built for plumbing shops that can&apos;t afford a missed ring
+          Built for Plumbing & HVAC Businesses That Can't Afford to Miss Customers
           </h2>
           <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
-            Everything you need to answer, qualify, and book—without hiring a
-            full-time receptionist.
+          Every missed call is a missed opportunity. AnswerKeeper helps plumbing and HVAC businesses answer every customer, capture emergency requests, book more appointments, and keep technicians focused on the job they're already doing.
           </p>
         </div>
 

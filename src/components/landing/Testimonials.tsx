@@ -1,24 +1,18 @@
-const testimonials = [
+const highlights = [
   {
-    quote:
-      "We used to lose two or three emergency calls a week after 6 PM. AnswerKeeper books them while we’re still wrapping up the last job of the day.",
-    name: "Derek Holt",
-    role: "Owner, Holt Family Plumbing",
-    location: "Austin, TX",
+    title: "Now Onboarding Early Customers",
+    description:
+      "AnswerKeeper is currently working with early plumbing and HVAC businesses to refine the platform using real-world feedback.",
   },
   {
-    quote:
-      "The SMS alerts are the game-changer. My on-call tech knows the address and the issue before they even call the customer back.",
-    name: "Priya Nair",
-    role: "Operations Manager, ClearFlow Services",
-    location: "San Jose, CA",
+    title: "Built With Service Businesses",
+    description:
+      "Every improvement is guided by conversations with plumbers, HVAC contractors, and other home service professionals.",
   },
   {
-    quote:
-      "I was skeptical about AI answering our phones. Customers say it sounds like our office—and we’re booking Saturdays we used to miss entirely.",
-    name: "Marcus Bell",
-    role: "Owner, Bell & Sons Plumbing",
-    location: "Charlotte, NC",
+    title: "See It Before You Commit",
+    description:
+      "Book a personalized demo to see how AnswerKeeper fits into your business before becoming an early customer.",
   },
 ];
 
@@ -26,38 +20,58 @@ export function Testimonials() {
   return (
     <section className="border-t border-border bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="mx-auto max-w-2xl text-center">
+
+        <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-            Testimonials
+            Early Access
           </p>
+
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-            Plumbing shops that stopped missing calls
+            Now Onboarding Plumbing & HVAC Businesses
           </h2>
+
           <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
-            Real outcomes from owners who put AnswerKeeper on their business
-            line.
+            AnswerKeeper is currently onboarding early customers and improving
+            the platform with feedback from real home service businesses.
           </p>
         </div>
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {testimonials.map((item) => (
-            <blockquote
-              key={item.name}
-              className="flex h-full flex-col rounded-2xl border border-border bg-surface p-6"
+          {highlights.map((item) => (
+            <article
+              key={item.title}
+              className="rounded-2xl border border-border bg-surface p-6"
             >
-              <p className="flex-1 text-sm leading-relaxed text-navy">
-                “{item.quote}”
+              <h3 className="font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
+                {item.title}
+              </h3>
+
+              <p className="mt-3 text-sm leading-relaxed text-navy-muted">
+                {item.description}
               </p>
-              <footer className="mt-6 border-t border-border pt-4">
-                <p className="font-[family-name:var(--font-outfit)] text-sm font-semibold text-navy">
-                  {item.name}
-                </p>
-                <p className="mt-0.5 text-xs text-navy-muted">{item.role}</p>
-                <p className="mt-0.5 text-xs text-navy-soft">{item.location}</p>
-              </footer>
-            </blockquote>
+            </article>
           ))}
         </div>
+
+        <div className="mt-12 rounded-3xl border border-blue-200 bg-blue-50 p-8 text-center">
+          <h3 className="font-[family-name:var(--font-outfit)] text-2xl font-semibold text-navy">
+            Interested in Becoming an Early Customer?
+          </h3>
+
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-navy-muted">
+            If you run a plumbing or HVAC business and want to stop missing
+            customer calls, we'd love to show you how AnswerKeeper works and
+            hear your feedback.
+          </p>
+
+          <a
+            href="#final-cta"
+            className="mt-8 inline-flex items-center justify-center rounded-xl bg-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-dark"
+          >
+            Book a Free Demo
+          </a>
+        </div>
+
       </div>
     </section>
   );
