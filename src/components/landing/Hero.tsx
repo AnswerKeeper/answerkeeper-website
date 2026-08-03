@@ -37,7 +37,7 @@ export function Hero() {
           </p>
 
           <div className="animate-fade-up-delay-3 mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            
+            <a
               href="https://tally.so/r/D49rpE"
               target="_blank"
               rel="noopener noreferrer"
