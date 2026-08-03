@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 
@@ -17,15 +18,19 @@ export function Navbar() {
     <header className="sticky top-0 z-50 border-b border-border/80 bg-white/85 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
 
-        <a href="/" className="flex items-center gap-2.5">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue text-sm font-bold text-white shadow-sm shadow-blue/30">
-            A
-          </span>
+      <a href="/" className="flex items-center gap-3">
+  <Image
+    src="/answerkeeper-logo.png"
+    alt="AnswerKeeper"
+    width={40}
+    height={40}
+    priority
+  />
 
-          <span className="font-[family-name:var(--font-outfit)] text-lg font-semibold tracking-tight text-navy">
-            AnswerKeeper
-          </span>
-        </a>
+  <span className="font-[family-name:var(--font-outfit)] text-lg font-semibold tracking-tight text-navy">
+    AnswerKeeper
+  </span>
+</a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {links.map((link) => (

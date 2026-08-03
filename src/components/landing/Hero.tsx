@@ -141,11 +141,11 @@ function HeroProductVisual() {
               Appointment Confirmed
             </p>
             <div className="mt-4 space-y-3">
-              <InfoRow label="Service" value="Emergency leak repair" />
-              <InfoRow label="Priority" value="High — same night" highlight />
-              <InfoRow label="Address" value="482 Oak Street, Unit 2" />
-              <InfoRow label="Window" value="Tonight, 7:30–9:00 PM" />
-              <InfoRow label="Technician notified" value="Sent to on-call tech" />
+            <InfoRow label="Service" value="Emergency Pipe Burst Repair" />
+            <InfoRow label="Priority" value="High — Same Night" highlight />
+            <InfoRow label="Address" value="482 Oak Street, Unit 2" />
+            <InfoRow label="Arrival Window" value="Tonight, 7:30–9:00 PM" />
+            <InfoRow label="Technician" value="Dispatch Confirmed" />
             </div>
             <div className="mt-6 rounded-xl border border-blue-mid bg-blue-soft px-4 py-3">
               <p className="text-sm font-semibold text-navy">

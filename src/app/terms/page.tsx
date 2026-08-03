@@ -27,10 +27,31 @@ export default function TermsPage() {
           AnswerKeeper is accurate and lawful.
         </p>
   
+        <section className="mt-10">
+  <h2 className="text-2xl font-semibold text-navy">
+    SMS & Telephone Communications
+  </h2>
+
+  <p className="mt-4 text-navy-muted leading-7">
+    By submitting your phone number through our website or communicating with
+    AnswerKeeper, you consent to receive automated and non-automated phone
+    calls and text messages related to your inquiry, appointment scheduling,
+    customer support, service updates, and other communications directly
+    related to the services you request.
+  </p>
+
+  <p className="mt-4 text-navy-muted leading-7">
+    Consent is not a condition of purchase. Message frequency varies.
+    Message and data rates may apply. You may opt out of SMS communications
+    at any time by replying <strong>STOP</strong>. For assistance,
+    reply <strong>HELP</strong> or contact us directly through our website.
+  </p>
+</section>
+        
         <h2 className="mt-10 text-2xl font-semibold">
           Service Availability
         </h2>
-  
+
         <p className="mt-3">
           We continuously improve our platform but cannot guarantee uninterrupted
           availability at all times.
