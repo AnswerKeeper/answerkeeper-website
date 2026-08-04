@@ -25,7 +25,7 @@ export function FinalCTA() {
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="mailto:hello@answerkeeper.com?subject=Book%20a%20Free%20Demo"
+                href="answerkeeper.app@gmail.com?subject=Book%20a%20Free%20Demo"
                 className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-blue-dark sm:w-auto"
               >
                 Book a Free Demo
