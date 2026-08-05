@@ -96,7 +96,7 @@ export function Footer() {
             <ul className="mt-3 space-y-2">
 
               <li>
-                
+              <a
                   href="mailto:answerkeeper.app@gmail.com"
                   className="text-sm text-navy-muted hover:text-navy"
                   >
