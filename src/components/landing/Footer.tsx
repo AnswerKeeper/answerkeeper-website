@@ -99,7 +99,7 @@ export function Footer() {
                 
                   href="mailto:answerkeeper.app@gmail.com"
                   className="text-sm text-navy-muted hover:text-navy"
-                >
+                  >
                   answerkeeper.app@gmail.com
                 </a>
               </li>
