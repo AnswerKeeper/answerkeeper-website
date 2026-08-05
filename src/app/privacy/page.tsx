@@ -4,7 +4,13 @@ export default function PrivacyPage() {
       <h1 className="text-4xl font-bold">Privacy Policy</h1>
 
       <p className="mt-3 text-sm text-gray-500">
-        Effective Date: July 30, 2026
+        Effective Date: July 30, 2026 · Last Updated: August 4, 2026
+      </p>
+
+      <p className="mt-3 text-sm text-gray-500">
+        This Privacy Policy applies to AnswerKeeper, a service operated by
+        AnswerKeeper Technologies (Business Name Registration No. 9746137,
+        registered with the Corporate Affairs Commission, Nigeria).
       </p>
 
       <p className="mt-6">

@@ -96,7 +96,7 @@ export function Footer() {
             <ul className="mt-3 space-y-2">
 
               <li>
-                <a
+                
                   href="mailto:answerkeeper.app@gmail.com"
                   className="text-sm text-navy-muted hover:text-navy"
                 >
@@ -120,11 +120,11 @@ export function Footer() {
         <div className="mx-auto flex max-w-6xl flex-col gap-2 px-5 py-5 text-xs text-navy-soft sm:flex-row sm:items-center sm:justify-between sm:px-8">
 
           <p>
-            © {new Date().getFullYear()} AnswerKeeper. All rights reserved.
+            © {new Date().getFullYear()} AnswerKeeper Technologies. All rights reserved.
           </p>
 
           <p>
-            Built for plumbing & HVAC businesses.
+            CAC Registration No. 9746137 · Built for plumbing & HVAC businesses.
           </p>
 
         </div>
