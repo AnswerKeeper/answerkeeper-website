@@ -65,7 +65,7 @@ export function Testimonials() {
           </p>
 
           <a
-            href="#final-cta"
+            href="https://tally.so/r/D49rpE"
             className="mt-8 inline-flex items-center justify-center rounded-xl bg-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-dark"
           >
             Book a Free Demo

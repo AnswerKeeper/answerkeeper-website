@@ -1,6 +1,10 @@
 import { ArrowRight } from "lucide-react";
 
-export function FinalCTA() {
+type FinalCTAProps = {
+  onWatchDemo?: () => void;
+};
+
+export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
   return (
     <section id="final-cta" className="border-t border-border bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
@@ -25,18 +29,21 @@ export function FinalCTA() {
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
-                href="mailto:answerkeeper.app@gmail.com?subject=Book%20a%20Free%20Demo"
+                href="https://tally.so/r/D49rpE"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-blue-dark sm:w-auto"
               >
                 Book a Free Demo
                 <ArrowRight size={16} />
               </a>
-              <a
-                href="#how-it-works"
-                className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
+              <button
+               type="button"
+               onClick={onWatchDemo}
+               className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
               >
-                Watch 90-Second Demo
-              </a>
+               Watch 90-Second Demo
+              </button>
             </div>
             <p className="mt-5 text-xs text-blue-mid/80">
               No long contracts to start. Setup usually takes less than a day.

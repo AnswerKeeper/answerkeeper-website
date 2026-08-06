@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 import {
   Navbar,
   Hero,
@@ -11,21 +15,39 @@ import {
   Footer,
 } from "@/components/landing";
 
+import { DemoModal } from "@/components/landing/DemoModal";
+
 export default function Home() {
+  const [demoOpen, setDemoOpen] = useState(false);
+
   return (
     <div id="top" className="flex min-h-full flex-col">
       <Navbar />
+
       <main className="flex-1">
-        <Hero />
+        <Hero onWatchDemo={() => setDemoOpen(true)} />
+
         <Problem />
+
         <Features />
+
         <HowItWorks />
+
         <Benefits />
+
         <Testimonials />
+
         <FAQ />
-        <FinalCTA />
+
+        <FinalCTA onWatchDemo={() => setDemoOpen(true)} />
       </main>
+
       <Footer />
+
+      <DemoModal
+        open={demoOpen}
+        onClose={() => setDemoOpen(false)}
+      />
     </div>
   );
 }

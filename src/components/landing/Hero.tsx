@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { DemoModal } from "./DemoModal";
 import { ArrowRight, Play } from "lucide-react";
 
-export function Hero() {
-  const [demoOpen, setDemoOpen] = useState(false);
+type HeroProps = {
+  onWatchDemo?: () => void;
+};
+
+export function Hero({ onWatchDemo }: HeroProps) {
+  
 
   return (
     <section className="relative overflow-hidden">
@@ -49,7 +51,7 @@ export function Hero() {
 
             <button
               type="button"
-              onClick={() => setDemoOpen(true)}
+              onClick={onWatchDemo}
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-semibold text-navy transition hover:border-blue hover:text-blue"
             >
               <Play size={14} aria-hidden="true" />
@@ -72,7 +74,6 @@ export function Hero() {
         <HeroProductVisual />
       </div>
 
-      <DemoModal open={demoOpen} onClose={() => setDemoOpen(false)} />
     </section>
   );
 }
