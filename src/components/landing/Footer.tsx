@@ -21,8 +21,9 @@ export function Footer() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-10 sm:grid-cols-3">
+        <div className="grid grid-cols-2 gap-10 sm:grid-cols-4">
 
+          {/* Product */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-wider text-navy-soft">
               Product
@@ -31,28 +32,46 @@ export function Footer() {
             <ul className="mt-3 space-y-2">
 
               <li>
-                <a href="/#features" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/#features"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   Features
                 </a>
               </li>
 
               <li>
-                <a href="/#how-it-works" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/#how-it-works"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   How It Works
                 </a>
               </li>
 
               <li>
-                <a href="/#benefits" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/#benefits"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   Benefits
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="/pricing"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
+                  Pricing
                 </a>
               </li>
 
             </ul>
           </div>
 
+          {/* Company */}
           <div>
-
             <p className="text-xs font-semibold uppercase tracking-wider text-navy-soft">
               Company
             </p>
@@ -60,35 +79,66 @@ export function Footer() {
             <ul className="mt-3 space-y-2">
 
               <li>
-                <a href="/about" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/about"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   About
                 </a>
               </li>
 
               <li>
-                <a href="/contact" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/contact"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   Contact
                 </a>
               </li>
 
+            </ul>
+          </div>
+
+          {/* Legal */}
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-wider text-navy-soft">
+              Legal
+            </p>
+
+            <ul className="mt-3 space-y-2">
+
               <li>
-                <a href="/privacy" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/privacy"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   Privacy Policy
                 </a>
               </li>
 
               <li>
-                <a href="/terms" className="text-sm text-navy-muted hover:text-navy">
+                <a
+                  href="/terms"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
                   Terms of Service
                 </a>
               </li>
 
-            </ul>
+              <li>
+                <a
+                  href="/refund-policy"
+                  className="text-sm text-navy-muted hover:text-navy"
+                >
+                  Refund Policy
+                </a>
+              </li>
 
+            </ul>
           </div>
 
+          {/* Contact */}
           <div>
-
             <p className="text-xs font-semibold uppercase tracking-wider text-navy-soft">
               Contact
             </p>
@@ -96,11 +146,11 @@ export function Footer() {
             <ul className="mt-3 space-y-2">
 
               <li>
-              <a
-                  href="mailto:answerkeeper.app@gmail.com"
+                <a
+                  href="mailto:support@answerkeeper.app"
                   className="text-sm text-navy-muted hover:text-navy"
-                  >
-                  answerkeeper.app@gmail.com
+                >
+                  support@answerkeeper.app
                 </a>
               </li>
 
@@ -109,7 +159,6 @@ export function Footer() {
               </li>
 
             </ul>
-
           </div>
 
         </div>
