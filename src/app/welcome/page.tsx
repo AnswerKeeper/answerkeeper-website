@@ -2,7 +2,11 @@ export default function WelcomePage() {
   return (
     <main className="min-h-screen bg-slate-50 flex items-center justify-center px-6">
       <div className="max-w-lg w-full rounded-2xl bg-white p-10 text-center shadow-sm border border-slate-200">
-        <div className="text-5xl mb-5">?</div>
+        <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100">
+          <svg className="h-8 w-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
 
         <h1 className="text-3xl font-bold text-slate-900">
           Welcome to AnswerKeeper
