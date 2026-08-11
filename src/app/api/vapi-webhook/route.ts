@@ -12,12 +12,29 @@ export async function POST(req: Request) {
     const body = await req.json();
     const message = body.message;
 
-    // Check if Vapi is making a tool/function call
-    if (message?.type === "tool-calls") {
+    console.log("Incoming Vapi Message Type:", message?.type);
+
+    // Handle tool-calls or function-call payload types
+    if (message?.type === "tool-calls" || message?.type === "function-call") {
       const toolCall = message.toolCalls?.[0];
-      const toolCallId = toolCall?.id;
-      const functionName = toolCall?.function?.name;
-      const args = toolCall?.function?.arguments || {};
+      const toolCallId = toolCall?.id || message.toolCallId || "call_default";
+
+      // Extract function name and raw arguments
+      const functionName =
+        toolCall?.function?.name || message.functionCall?.name;
+      let rawArgs =
+        toolCall?.function?.arguments || message.functionCall?.parameters || {};
+
+      // If Vapi sent arguments as a stringified JSON string, parse it
+      if (typeof rawArgs === "string") {
+        try {
+          rawArgs = JSON.parse(rawArgs);
+        } catch (e) {
+          console.error("Failed to parse tool call arguments string:", e);
+        }
+      }
+
+      console.log(`Executing Function: ${functionName}`, rawArgs);
 
       if (functionName === "book_appointment") {
         const {
@@ -27,7 +44,7 @@ export async function POST(req: Request) {
           serviceAddress,
           callbackNumber,
           clientId = "default",
-        } = args;
+        } = rawArgs;
 
         if (!appointmentTime) {
           return NextResponse.json({
@@ -40,7 +57,7 @@ export async function POST(req: Request) {
           });
         }
 
-        // 1. Fetch client credentials from Supabase
+        // Fetch client credentials from Supabase
         const { data: client, error: dbError } = await supabase
           .from("clients")
           .select("*")
@@ -58,12 +75,12 @@ export async function POST(req: Request) {
           });
         }
 
-        // 2. Format private key properly
+        // Format private key
         const formattedPrivateKey = client.private_key
           .replace(/^"|"$/g, "")
           .replace(/\\n/g, "\n");
 
-        // 3. Authenticate Google Calendar
+        // Authenticate Google Calendar
         const auth = new google.auth.GoogleAuth({
           credentials: {
             client_email: client.client_email,
@@ -74,13 +91,13 @@ export async function POST(req: Request) {
 
         const calendar = google.calendar({ version: "v3", auth });
 
-        // 4. Calculate start and end times
+        // Calculate start and end times
         const startIso = new Date(appointmentTime).toISOString();
         const endIso = new Date(
           new Date(appointmentTime).getTime() + 30 * 60000
         ).toISOString();
 
-        // 5. Insert event into Google Calendar
+        // Insert event into Google Calendar
         await calendar.events.insert({
           calendarId: client.calendar_id,
           requestBody: {
@@ -91,7 +108,8 @@ export async function POST(req: Request) {
           },
         });
 
-        // 6. Return standard Vapi response
+        console.log("Successfully inserted event into Google Calendar.");
+
         return NextResponse.json({
           results: [
             {
