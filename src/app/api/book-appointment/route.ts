@@ -67,8 +67,14 @@ export async function POST(request: NextRequest) {
       requestBody: {
         summary: `${serviceType} - ${customerName}`,
         description: `Phone: ${formattedPhone || 'Not provided'}\nAddress: ${address}`,
-        start: { dateTime: startTime.toISOString() },
-        end: { dateTime: endTime.toISOString() },
+        start: { 
+          dateTime: startTime.toISOString(),
+          timeZone: 'America/New_York'
+        },
+        end: { 
+          dateTime: endTime.toISOString(),
+          timeZone: 'America/New_York'
+        },
       },
     });
 
