@@ -29,9 +29,15 @@ export async function POST(request: NextRequest) {
       : `+${cleanedPhone}`;
 
     // Google Calendar Event Creation
+   let rawKey = process.env.GOOGLE_PRIVATE_KEY || '';
+    if (rawKey.startsWith('"') && rawKey.endsWith('"')) {
+      rawKey = rawKey.slice(1, -1);
+    }
+    const privateKey = rawKey.replace(/\\n/g, '\n');
+
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
-      key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      key: privateKey,
       scopes: ['https://www.googleapis.com/auth/calendar'],
     });
 
