@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       args = body;
     }
 
-    // Support both parameter naming conventions (Vapi Schema vs Custom backend)
+    // Support all parameter naming conventions (Vapi Schema vs Custom backend)
     const customerName = args.customerName || args.callerName || 'Valued Customer';
     const customerPhone = args.customerPhone || args.callbackNumber || '';
     const address = args.address || args.serviceAddress || 'Not provided';
@@ -72,10 +72,9 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    // 7. Send Twilio SMS Notification
+    // 7. Send Twilio SMS Notification (Single segment under 160 chars)
     if (process.env.TWILIO_PHONE_NUMBER && formattedPhone.length > 5) {
       try {
-        // Format a short, single-segment message (under 160 chars)
         const dateStr = startTime.toLocaleDateString('en-US', { 
           weekday: 'short', 
           month: 'short', 
@@ -90,12 +89,30 @@ export async function POST(request: NextRequest) {
         const smsMessage = `AnswerKeeper: Hi ${customerName}, your ${serviceType} appointment is booked for ${dateStr} at ${timeStr}. Address: ${address}`;
 
         await twilioClient.messages.create({
-          body: smsMessage.slice(0, 160), // Hard cap to guarantee 1 segment
+          body: smsMessage.slice(0, 160),
           from: process.env.TWILIO_PHONE_NUMBER,
           to: formattedPhone,
         });
-        console.log(`SMS successfully queued for ${formattedPhone}`);
+        console.log(`SMS successfully sent to ${formattedPhone}`);
       } catch (smsErr: any) {
-        console.error('Twilio SMS Error:', smsErr?.message || smsErr);
+        console.error('Twilio SMS Failed:', smsErr?.message || smsErr);
       }
     }
+
+    // 8. Return Success to Vapi
+    return NextResponse.json({
+      results: [
+        {
+          toolCallId: toolCall?.id,
+          result: `Appointment successfully booked for ${customerName} on ${startTime.toLocaleString()}`,
+        },
+      ],
+    });
+  } catch (error: any) {
+    console.error('Booking Execution Failed:', error?.message || error);
+    return NextResponse.json(
+      { error: 'Failed to complete booking execution', details: error?.message },
+      { status: 500 }
+    );
+  }
+}
