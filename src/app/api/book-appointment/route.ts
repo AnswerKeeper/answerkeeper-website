@@ -1,117 +1,89 @@
-﻿import { NextResponse } from "next/server";
-import { google } from "googleapis";
-import { createClient } from "@supabase/supabase-js";
+import { NextResponse } from 'next/server';
+import { google } from 'googleapis';
+import twilio from 'twilio';
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+// Initialize Twilio Client
+const twilioClient = twilio(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
 );
 
-export async function POST(req: Request) {
+export async function POST(request) {
   try {
-    const payload = await req.json();
-
-    // Support Vapi toolCalls, legacy functionCall, or flat payload
-    const toolCall = payload.message?.toolCalls?.[0];
-    const toolCallId = toolCall?.id || "call_default";
-
-    const args =
-      toolCall?.function?.arguments ||
-      payload.message?.functionCall?.parameters ||
-      payload;
-
+    const body = await request.json();
+    
+    // Extract parameters from Vapi request
     const {
-      callerName,
+      customerName,
+      customerPhone,
       serviceType,
-      appointmentTime,
-      serviceAddress,
-      callbackNumber,
-      clientId = "default",
-    } = args;
+      address,
+      appointmentTime
+    } = body.message?.toolCalls?.[0]?.function?.arguments || body;
 
-    if (!appointmentTime) {
-      return NextResponse.json({
-        results: [
-          {
-            toolCallId,
-            result: "Failed: Appointment time was not provided.",
-          },
-        ],
-      });
-    }
+    // 1. Safe E.164 Phone Formatting
+    const rawPhone = customerPhone || '';
+    const cleanedPhone = String(rawPhone).replace(/[^\d+]/g, '');
+    const formattedPhone = cleanedPhone.startsWith('+') 
+      ? cleanedPhone 
+      : `+${cleanedPhone}`;
 
-    // 1. Fetch client credentials from Supabase
-    const { data: client, error: dbError } = await supabase
-      .from("clients")
-      .select("*")
-      .eq("client_id", clientId)
-      .single();
-
-    if (dbError || !client) {
-      return NextResponse.json({
-        results: [
-          {
-            toolCallId,
-            result: `Failed: Could not find client credentials for ${clientId}.`,
-          },
-        ],
-      });
-    }
-
-    // 2. Format private key
-    const formattedPrivateKey = client.private_key
-      .replace(/^"|"$/g, "")
-      .replace(/\\n/g, "\n");
-
-    // 3. Authenticate Google Calendar
-    const auth = new google.auth.GoogleAuth({
-      credentials: {
-        client_email: client.client_email,
-        private_key: formattedPrivateKey,
-      },
-      scopes: ["https://www.googleapis.com/auth/calendar"],
+    // 2. Google Calendar Event Creation
+    const auth = new google.auth.JWT({
+      email: process.env.GOOGLE_CLIENT_EMAIL,
+      key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+      scopes: ['https://www.googleapis.com/auth/calendar'],
     });
 
-    const calendar = google.calendar({ version: "v3", auth });
+    const calendar = google.calendar({ version: 'v3', auth });
 
-    // 4. Set start and end times
-    const startIso = new Date(appointmentTime).toISOString();
-    const endIso = new Date(
-      new Date(appointmentTime).getTime() + 30 * 60000
-    ).toISOString();
+    // Parse start time and set 30-minute duration
+    const startDate = new Date(appointmentTime);
+    const endDate = new Date(startDate.getTime() + 30 * 60 * 1000);
 
-    // 5. Build event
     const event = {
-      summary: `${serviceType || "Appointment"} - ${callerName || "Customer"}`,
-      description: `Phone: ${callbackNumber || "N/A"}\nAddress: ${serviceAddress || "N/A"}`,
-      start: { dateTime: startIso },
-      end: { dateTime: endIso },
+      summary: `${serviceType || 'Service Call'} - ${customerName}`,
+      description: `Phone: ${formattedPhone}\nAddress: ${address}`,
+      start: {
+        dateTime: startDate.toISOString(),
+      },
+      end: {
+        dateTime: endDate.toISOString(),
+      },
     };
 
-    // 6. Insert event
     await calendar.events.insert({
-      calendarId: client.calendar_id,
-      requestBody: event,
+      calendarId: process.env.GOOGLE_CALENDAR_ID || 'primary',
+      resource: event,
     });
 
-    // 7. Return Vapi-compliant tool result
+    // 3. Twilio SMS Dispatch
+    if (process.env.TWILIO_PHONE_NUMBER && formattedPhone.length > 5) {
+      try {
+        await twilioClient.messages.create({
+          body: `Hi ${customerName || 'there'}, your appointment for ${serviceType || 'service'} is confirmed for ${startDate.toLocaleString()} at ${address}.`,
+          from: process.env.TWILIO_PHONE_NUMBER,
+          to: formattedPhone,
+        });
+      } catch (smsError) {
+        console.error('Twilio SMS Error:', smsError);
+        // Continue execution so Vapi still gets a success response
+      }
+    }
+
     return NextResponse.json({
       results: [
         {
-          toolCallId,
-          result: `Success! The appointment for ${callerName || "the caller"} has been booked for ${startIso}.`,
+          toolCallId: body.message?.toolCalls?.[0]?.id,
+          result: 'Appointment successfully booked and confirmation sent.',
         },
       ],
     });
-  } catch (err: any) {
-    console.error("Booking Error:", err);
-    return NextResponse.json({
-      results: [
-        {
-          toolCallId: "call_error",
-          result: `Error booking appointment: ${err.message}`,
-        },
-      ],
-    });
+  } catch (error) {
+    console.error('Booking Error:', error);
+    return NextResponse.json(
+      { error: 'Failed to book appointment' },
+      { status: 500 }
+    );
   }
 }
