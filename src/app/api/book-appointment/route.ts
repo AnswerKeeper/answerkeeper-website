@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { google } from 'googleapis';
 import twilio from 'twilio';
 
@@ -8,7 +8,7 @@ const twilioClient = twilio(
   process.env.TWILIO_AUTH_TOKEN
 );
 
-export async function POST(request) {
+export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     
@@ -21,14 +21,14 @@ export async function POST(request) {
       appointmentTime
     } = body.message?.toolCalls?.[0]?.function?.arguments || body;
 
-    // 1. Safe E.164 Phone Formatting
+    // Safe E.164 Phone Formatting
     const rawPhone = customerPhone || '';
     const cleanedPhone = String(rawPhone).replace(/[^\d+]/g, '');
     const formattedPhone = cleanedPhone.startsWith('+') 
       ? cleanedPhone 
       : `+${cleanedPhone}`;
 
-    // 2. Google Calendar Event Creation
+    // Google Calendar Event Creation
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
       key: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
@@ -37,7 +37,6 @@ export async function POST(request) {
 
     const calendar = google.calendar({ version: 'v3', auth });
 
-    // Parse start time and set 30-minute duration
     const startDate = new Date(appointmentTime);
     const endDate = new Date(startDate.getTime() + 30 * 60 * 1000);
 
@@ -54,10 +53,10 @@ export async function POST(request) {
 
     await calendar.events.insert({
       calendarId: process.env.GOOGLE_CALENDAR_ID || 'primary',
-      resource: event,
+      requestBody: event,
     });
 
-    // 3. Twilio SMS Dispatch
+    // Twilio SMS Dispatch
     if (process.env.TWILIO_PHONE_NUMBER && formattedPhone.length > 5) {
       try {
         await twilioClient.messages.create({
@@ -67,7 +66,6 @@ export async function POST(request) {
         });
       } catch (smsError) {
         console.error('Twilio SMS Error:', smsError);
-        // Continue execution so Vapi still gets a success response
       }
     }
 
