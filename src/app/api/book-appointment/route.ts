@@ -75,30 +75,27 @@ export async function POST(request: NextRequest) {
     // 7. Send Twilio SMS Notification
     if (process.env.TWILIO_PHONE_NUMBER && formattedPhone.length > 5) {
       try {
+        // Format a short, single-segment message (under 160 chars)
+        const dateStr = startTime.toLocaleDateString('en-US', { 
+          weekday: 'short', 
+          month: 'short', 
+          day: 'numeric' 
+        });
+        const timeStr = startTime.toLocaleTimeString('en-US', { 
+          hour: 'numeric', 
+          minute: '2-digit',
+          timeZone: 'America/New_York' 
+        });
+
+        const smsMessage = `AnswerKeeper: Hi ${customerName}, your ${serviceType} appointment is booked for ${dateStr} at ${timeStr}. Address: ${address}`;
+
         await twilioClient.messages.create({
-          body: `Hi ${customerName}, your ${serviceType} appointment is confirmed for ${startTime.toLocaleString('en-US', { timeZone: 'America/New_York' })} at ${address}.`,
+          body: smsMessage.slice(0, 160), // Hard cap to guarantee 1 segment
           from: process.env.TWILIO_PHONE_NUMBER,
           to: formattedPhone,
         });
+        console.log(`SMS successfully queued for ${formattedPhone}`);
       } catch (smsErr: any) {
-        console.error('Twilio SMS Failed:', smsErr?.message || smsErr);
+        console.error('Twilio SMS Error:', smsErr?.message || smsErr);
       }
     }
-
-    // 8. Return Success to Vapi
-    return NextResponse.json({
-      results: [
-        {
-          toolCallId: toolCall?.id,
-          result: `Appointment successfully booked for ${customerName} on ${startTime.toLocaleString()}`,
-        },
-      ],
-    });
-  } catch (error: any) {
-    console.error('Booking Execution Failed:', error?.message || error);
-    return NextResponse.json(
-      { error: 'Failed to complete booking execution', details: error?.message },
-      { status: 500 }
-    );
-  }
-}
