@@ -8,3 +8,5 @@ export { Testimonials } from "./Testimonials";
 export { FAQ } from "./FAQ";
 export { FinalCTA } from "./FinalCTA";
 export { Footer } from "./Footer";
+export * from "./AudioPlayer";
+export * from "./RevenueCalculator";

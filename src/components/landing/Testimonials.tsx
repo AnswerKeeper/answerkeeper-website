@@ -20,7 +20,6 @@ export function Testimonials() {
   return (
     <section className="border-t border-border bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
             Early Access
@@ -40,7 +39,7 @@ export function Testimonials() {
           {highlights.map((item) => (
             <article
               key={item.title}
-              className="rounded-2xl border border-border bg-surface p-6"
+              className="rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-blue/40 hover:shadow-xl hover:shadow-blue/10 cursor-pointer"
             >
               <h3 className="font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
                 {item.title}
@@ -53,7 +52,7 @@ export function Testimonials() {
           ))}
         </div>
 
-        <div className="mt-12 rounded-3xl border border-blue-200 bg-blue-50 p-8 text-center">
+        <div className="mt-12 rounded-3xl border border-blue-200 bg-blue-50 p-8 text-center shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl hover:shadow-blue/10">
           <h3 className="font-[family-name:var(--font-outfit)] text-2xl font-semibold text-navy">
             Interested in Becoming an Early Customer?
           </h3>
@@ -66,12 +65,13 @@ export function Testimonials() {
 
           <a
             href="https://tally.so/r/D49rpE"
-            className="mt-8 inline-flex items-center justify-center rounded-xl bg-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-dark"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-flex items-center justify-center rounded-xl bg-blue px-6 py-3 text-sm font-semibold text-white transition hover:bg-blue-dark shadow-md shadow-blue/20"
           >
             Book a Free Demo
           </a>
         </div>
-
       </div>
     </section>
   );

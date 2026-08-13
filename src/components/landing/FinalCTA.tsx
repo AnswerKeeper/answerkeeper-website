@@ -8,14 +8,14 @@ export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
   return (
     <section id="final-cta" className="border-t border-border bg-white py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
-        <div className="relative overflow-hidden rounded-3xl bg-navy px-6 py-14 text-center sm:px-12 sm:py-16">
+        <div className="relative overflow-hidden rounded-3xl bg-navy px-6 py-14 text-center shadow-2xl transition-all duration-300 hover:shadow-navy/30 sm:px-12 sm:py-16">
           <div
             aria-hidden
-            className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-blue/30 blur-3xl"
+            className="pointer-events-none absolute -left-20 -top-20 h-64 w-64 rounded-full bg-blue/30 blur-3xl transition-opacity duration-500 hover:opacity-100 opacity-80"
           />
           <div
             aria-hidden
-            className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-blue/20 blur-3xl"
+            className="pointer-events-none absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-blue/20 blur-3xl transition-opacity duration-500 hover:opacity-100 opacity-80"
           />
 
           <div className="relative mx-auto max-w-2xl">
@@ -31,7 +31,7 @@ export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
                 href="https://tally.so/r/D49rpE"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-blue-dark sm:w-auto"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-black/20 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-blue-dark hover:shadow-xl hover:shadow-blue/30 sm:w-auto"
               >
                 Start 14-Day Free Trial
                 <ArrowRight size={16} />
@@ -39,7 +39,7 @@ export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
               
               <a
                 href="tel:+14127252760"
-                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-1 hover:border-white/40 hover:bg-white/10 sm:w-auto"
               >
                 <Phone size={14} />
                 Call Live Demo: +1 (412) 725-2760
@@ -47,7 +47,7 @@ export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
             </div>
 
             {/* Risk Reversal Banner */}
-            <div className="mt-8 inline-block rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs sm:text-sm font-medium text-blue-mid">
+            <div className="mt-8 inline-block rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs sm:text-sm font-medium text-blue-mid transition-all duration-300 hover:border-white/20 hover:bg-white/10 hover:text-white cursor-pointer">
               14-Day Free Trial • No Credit Card Required • Setup Takes 2 Minutes
             </div>
           </div>

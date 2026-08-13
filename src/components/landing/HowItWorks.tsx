@@ -1,28 +1,33 @@
+import { Phone, Siren, ClipboardCheck, BellRing } from "lucide-react";
+
 const steps = [
   {
     number: "01",
-    title: "30-Second Setup",
-    description: (
-      <>
-        Turn on conditional call forwarding on your existing line (
-        <code className="rounded bg-blue-50 px-1.5 py-0.5 font-mono text-xs font-semibold text-blue border border-blue-200">
-          *71
-        </code>
-        ). No new phone numbers or complex migration required.
-      </>
-    ),
+    title: "Unanswered Call Directs to AnswerKeeper",
+    description:
+      "When your team is on a job or unable to answer, the incoming call forwards automatically so no potential customer hits voicemail or hangs up.",
+    icon: Phone,
   },
   {
     number: "02",
-    title: "Smart Triage & Detail Capture",
+    title: "Emergency & Job Details Gathered",
     description:
-      "AnswerKeeper greets the caller on the 3rd ring, assesses urgency (Active Leak / No Heat vs. Routine Call), and collects all property and job details automatically.",
+      "AnswerKeeper collects essential job information, identifies urgent HVAC or plumbing emergencies, and captures complete customer contact details.",
+    icon: Siren,
   },
   {
     number: "03",
-    title: "Calendar Booking & Emergency Alert",
+    title: "Service Request Organized",
     description:
-      "Standard service calls get booked directly on your Google Calendar. Urgent emergency calls trigger an immediate SMS alert straight to your cell phone.",
+      "The request details are structured into a clean job summary, ensuring critical emergency details are prioritized accurately.",
+    icon: ClipboardCheck,
+  },
+  {
+    number: "04",
+    title: "Technicians Notified Instantly",
+    description:
+      "Your team receives prompt alerts with all gathered job details, keeping your technicians informed without disrupting active jobs.",
+    icon: BellRing,
   },
 ];
 
@@ -32,41 +37,38 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-            3 Frictionless Steps
+            How It Works
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-            How AnswerKeeper Works
+            Seamless Call Handling for Busy Contractors
           </h2>
           <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
-            Keep your existing business number while AnswerKeeper triages emergencies, captures job details, and fills your dispatch schedule automatically.
+            From unanswered calls to rapid dispatch, AnswerKeeper keeps your operations running effortlessly.
           </p>
         </div>
 
-        <div className="relative mt-14">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-[16%] right-[16%] top-10 hidden h-px bg-gradient-to-r from-transparent via-blue-mid to-transparent md:block"
-          />
-          <ol className="grid gap-6 md:grid-cols-3">
-            {steps.map((step) => (
-              <li
-                key={step.number}
-                className="relative flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 text-center md:bg-white md:text-left transition hover:border-blue-mid hover:shadow-sm"
-              >
-                <div>
-                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue font-[family-name:var(--font-outfit)] text-sm font-bold text-white shadow-md shadow-blue/25 md:mx-0">
-                    {step.number}
-                  </span>
-                  <h3 className="mt-5 font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
-                    {step.title}
-                  </h3>
-                  <div className="mt-2 text-sm leading-relaxed text-navy-muted">
-                    {step.description}
-                  </div>
+        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step) => (
+            <article
+              key={step.number}
+              className="group relative rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-blue/40 hover:shadow-xl hover:shadow-blue/10 cursor-pointer"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-[family-name:var(--font-outfit)] text-2xl font-bold text-blue/30 transition-colors duration-300 group-hover:text-blue">
+                  {step.number}
+                </span>
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue/10 text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-white">
+                  <step.icon size={18} strokeWidth={1.75} />
                 </div>
-              </li>
-            ))}
-          </ol>
+              </div>
+              <h3 className="mt-5 font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-navy-muted">
+                {step.description}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

@@ -4,8 +4,8 @@ const benefits = [
   {
     icon: DollarSign,
     title: "Capture More Service Opportunities",
-description:
-  "Every answered call gives your business a better chance to win new customers before they contact another company.",
+    description:
+      "Every answered call gives your business a better chance to win new customers before they contact another company.",
   },
   {
     icon: Moon,
@@ -34,10 +34,10 @@ export function Benefits() {
         <div className="grid items-start gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-            Built for Home Service Businesses
+              Built for Home Service Businesses
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-            Built Around the Way Plumbing & HVAC Businesses Work
+              Built Around the Way Plumbing & HVAC Businesses Work
             </h2>
             <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
               AnswerKeeper turns every ring into a captured opportunity—so your
@@ -49,9 +49,9 @@ export function Benefits() {
             {benefits.map((benefit) => (
               <article
                 key={benefit.title}
-                className="rounded-2xl border border-border bg-white p-5 transition hover:border-blue-mid"
+                className="group rounded-2xl border border-border bg-white p-5 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-blue/40 hover:shadow-xl hover:shadow-blue/10 cursor-pointer"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-soft text-blue">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue/10 text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-white">
                   <benefit.icon size={18} strokeWidth={1.75} />
                 </div>
                 <h3 className="mt-4 font-[family-name:var(--font-outfit)] text-base font-semibold text-navy">

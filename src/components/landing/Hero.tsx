@@ -24,7 +24,7 @@ export function Hero({ onWatchDemo }: HeroProps) {
             AnswerKeeper
           </p>
 
-          <div className="mt-5 inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue">
+          <div className="mt-5 inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-blue/30 hover:bg-blue-100/50 cursor-pointer">
             Built for Plumbing &amp; HVAC Contractors
           </div>
 
@@ -39,7 +39,7 @@ export function Hero({ onWatchDemo }: HeroProps) {
           <div className="animate-fade-up-delay-3 mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
               href="tel:+14127252760"
-              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-blue/25 transition hover:bg-blue-dark sm:w-auto"
+              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-blue/25 transition-all duration-300 ease-out hover:-translate-y-1 hover:bg-blue-dark hover:shadow-xl hover:shadow-blue/35 sm:w-auto"
             >
               <Phone size={16} aria-hidden="true" />
               Call Live Demo: +1 (412) 725-2760
@@ -49,7 +49,7 @@ export function Hero({ onWatchDemo }: HeroProps) {
               href="https://tally.so/r/D49rpE"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 text-sm font-semibold text-navy transition hover:border-blue hover:text-blue sm:w-auto"
+              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 text-sm font-semibold text-navy shadow-xs transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue hover:text-blue hover:shadow-md sm:w-auto"
             >
               Start 14-Day Free Trial
               <ArrowRight size={16} aria-hidden="true" />
@@ -59,7 +59,7 @@ export function Hero({ onWatchDemo }: HeroProps) {
               <button
                 type="button"
                 onClick={onWatchDemo}
-                className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 text-sm font-semibold text-navy transition hover:border-blue hover:text-blue sm:w-auto"
+                className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 text-sm font-semibold text-navy shadow-xs transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue hover:text-blue hover:shadow-md sm:w-auto cursor-pointer"
               >
                 <Play size={14} aria-hidden="true" />
                 Watch Demo
@@ -68,11 +68,11 @@ export function Hero({ onWatchDemo }: HeroProps) {
           </div>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-navy-muted">
-            <span>✓ Built for Plumbing &amp; HVAC</span>
-            <span>✓ Answers Calls 24/7</span>
-            <span>✓ Works With Your Existing Number</span>
-            <span>✓ 14-Day Free Trial</span>
-            <span>✓ No Credit Card Required</span>
+            <span className="transition-colors hover:text-navy">✓ Built for Plumbing &amp; HVAC</span>
+            <span className="transition-colors hover:text-navy">✓ Answers Calls 24/7</span>
+            <span className="transition-colors hover:text-navy">✓ Works With Your Existing Number</span>
+            <span className="transition-colors hover:text-navy">✓ 14-Day Free Trial</span>
+            <span className="transition-colors hover:text-navy">✓ No Credit Card Required</span>
           </div>
         </div>
       </div>
@@ -89,7 +89,7 @@ export function Hero({ onWatchDemo }: HeroProps) {
 function HeroProductVisual() {
   return (
     <div className="animate-float-soft mx-auto max-w-5xl px-5 sm:px-8">
-      <div className="overflow-hidden rounded-t-2xl border border-b-0 border-border bg-white shadow-[0_-8px_40px_rgba(11,31,58,0.08)]">
+      <div className="overflow-hidden rounded-t-2xl border border-b-0 border-border bg-white shadow-[0_-8px_40px_rgba(11,31,58,0.08)] transition-all duration-300 hover:shadow-[0_-12px_50px_rgba(11,31,58,0.12)]">
         <div className="flex items-center gap-2 border-b border-border bg-surface px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
           <span className="h-2.5 w-2.5 rounded-full bg-border-strong" />
@@ -109,7 +109,7 @@ function HeroProductVisual() {
                 <p className="mt-1 font-[family-name:var(--font-outfit)] text-xl font-semibold text-navy">
                   Emergency Plumbing Call
                 </p>
-                <div className="mt-2 inline-flex items-center rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white">
+                <div className="mt-2 inline-flex items-center rounded-full bg-red-600 px-3 py-1 text-xs font-bold text-white shadow-xs transition-transform duration-300 hover:scale-105">
                   🚨 Emergency Service Request
                 </div>
                 <p className="mt-1 text-sm text-navy-muted">
@@ -118,7 +118,7 @@ function HeroProductVisual() {
               </div>
               <div className="relative flex h-11 w-11 shrink-0 items-center justify-center">
                 <span className="animate-pulse-ring absolute inset-0 rounded-full bg-blue/30" />
-                <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-blue text-xs font-bold text-white">
+                <span className="relative flex h-9 w-9 items-center justify-center rounded-full bg-blue text-xs font-bold text-white shadow-xs">
                   LIVE
                 </span>
               </div>
@@ -154,7 +154,7 @@ function HeroProductVisual() {
               <InfoRow label="Arrival Window" value="Tonight, 7:30–9:00 PM" />
               <InfoRow label="Technician" value="Dispatch Confirmed" />
             </div>
-            <div className="mt-6 rounded-xl border border-blue-mid bg-blue-soft px-4 py-3">
+            <div className="mt-6 rounded-xl border border-blue-mid bg-blue-soft px-4 py-3 shadow-xs transition-all duration-300 hover:shadow-md hover:border-blue">
               <p className="text-sm font-semibold text-navy">
                 Lead booked while you were on a job
               </p>
@@ -182,10 +182,10 @@ function ChatBubble({
   return (
     <div className={`flex ${isAi ? "justify-start" : "justify-end"}`}>
       <div
-        className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-left sm:max-w-[85%] ${
+        className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-left sm:max-w-[85%] transition-all duration-300 hover:scale-[1.01] ${
           isAi
-            ? "rounded-tl-md bg-blue-soft text-navy"
-            : "rounded-tr-md bg-navy text-white"
+            ? "rounded-tl-md bg-blue-soft text-navy hover:shadow-xs"
+            : "rounded-tr-md bg-navy text-white hover:shadow-xs"
         }`}
       >
         <p className={`text-[11px] font-semibold ${isAi ? "text-blue" : "text-blue-mid"}`}>
@@ -207,7 +207,7 @@ function InfoRow({
   highlight?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-white px-3.5 py-2.5">
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-white px-3.5 py-2.5 transition-all duration-300 hover:border-blue/40 hover:shadow-xs hover:-translate-y-0.5">
       <span className="text-xs font-medium text-navy-soft">{label}</span>
       <span
         className={`text-right text-sm font-semibold ${

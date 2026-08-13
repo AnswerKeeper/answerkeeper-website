@@ -4,12 +4,12 @@ export function Footer() {
       <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 sm:px-8 md:flex-row md:items-start md:justify-between">
 
         <div className="max-w-sm">
-          <a href="/" className="flex items-center gap-2.5">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue text-sm font-bold text-white">
+          <a href="/" className="group inline-flex items-center gap-2.5">
+            <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue text-sm font-bold text-white shadow-xs transition-transform duration-300 group-hover:scale-105">
               A
             </span>
 
-            <span className="font-[family-name:var(--font-outfit)] text-lg font-semibold tracking-tight text-navy">
+            <span className="font-[family-name:var(--font-outfit)] text-lg font-semibold tracking-tight text-navy transition-colors group-hover:text-blue">
               AnswerKeeper
             </span>
           </a>
@@ -34,7 +34,7 @@ export function Footer() {
               <li>
                 <a
                   href="/#features"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Features
                 </a>
@@ -43,7 +43,7 @@ export function Footer() {
               <li>
                 <a
                   href="/#how-it-works"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   How It Works
                 </a>
@@ -52,7 +52,7 @@ export function Footer() {
               <li>
                 <a
                   href="/#benefits"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Benefits
                 </a>
@@ -61,7 +61,7 @@ export function Footer() {
               <li>
                 <a
                   href="/pricing"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Pricing
                 </a>
@@ -81,7 +81,7 @@ export function Footer() {
               <li>
                 <a
                   href="/about"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   About
                 </a>
@@ -90,7 +90,7 @@ export function Footer() {
               <li>
                 <a
                   href="/contact"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Contact
                 </a>
@@ -110,7 +110,7 @@ export function Footer() {
               <li>
                 <a
                   href="/privacy"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Privacy Policy
                 </a>
@@ -119,7 +119,7 @@ export function Footer() {
               <li>
                 <a
                   href="/terms"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Terms of Service
                 </a>
@@ -128,7 +128,7 @@ export function Footer() {
               <li>
                 <a
                   href="/refund-policy"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   Refund Policy
                 </a>
@@ -148,7 +148,7 @@ export function Footer() {
               <li>
                 <a
                   href="mailto:support@answerkeeper.app"
-                  className="text-sm text-navy-muted hover:text-navy"
+                  className="inline-block text-sm text-navy-muted transition-all duration-200 hover:translate-x-0.5 hover:text-navy"
                 >
                   support@answerkeeper.app
                 </a>
@@ -173,7 +173,7 @@ export function Footer() {
           </p>
 
           <p>
-            CAC Registration No. 9746137 · Built for plumbing & HVAC businesses.
+            CAC Registration No. 9746137 · Built for plumbing &amp; HVAC businesses.
           </p>
 
         </div>

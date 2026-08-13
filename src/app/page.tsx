@@ -6,6 +6,7 @@ import {
   Navbar,
   Hero,
   Problem,
+  RevenueCalculator,
   Features,
   HowItWorks,
   Benefits,
@@ -28,6 +29,8 @@ export default function Home() {
         <Hero onWatchDemo={() => setDemoOpen(true)} />
 
         <Problem />
+
+        <RevenueCalculator />
 
         <Features />
 

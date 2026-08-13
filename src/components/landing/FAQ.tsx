@@ -60,12 +60,12 @@ export function FAQ() {
             return (
               <div
                 key={faq.question}
-                className="overflow-hidden rounded-2xl border border-border bg-white"
+                className="overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-blue/40 hover:shadow-lg hover:shadow-blue/10"
               >
                 <button
                   type="button"
                   aria-expanded={isOpen}
-                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                  className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left cursor-pointer"
                   onClick={() => setOpenIndex(isOpen ? null : index)}
                 >
                   <span className="font-[family-name:var(--font-outfit)] text-sm font-semibold text-navy sm:text-base">
@@ -74,7 +74,7 @@ export function FAQ() {
                   <ChevronDown
                     size={18}
                     className={`shrink-0 text-navy-soft transition-transform duration-300 ${
-                      isOpen ? "rotate-180" : ""
+                      isOpen ? "rotate-180 text-blue" : ""
                     }`}
                   />
                 </button>

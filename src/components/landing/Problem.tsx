@@ -47,14 +47,14 @@ export function Problem() {
           {problems.map((item) => (
             <article
               key={item.title}
-              className="relative flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 transition hover:border-blue-mid hover:bg-blue-soft/30"
+              className="group relative flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-blue-mid hover:bg-blue-soft/30 hover:shadow-xl hover:shadow-blue/5 cursor-pointer"
             >
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-blue shadow-sm ring-1 ring-border">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-blue shadow-sm ring-1 ring-border transition-all duration-300 group-hover:scale-105 group-hover:border-blue/30 group-hover:shadow-md">
                     <item.icon size={20} strokeWidth={1.75} />
                   </div>
-                  <span className={`rounded-full border px-2.5 py-0.5 text-xs font-medium ${item.badgeStyle}`}>
+                  <span className={`rounded-full border px-2.5 py-0.5 text-xs font-medium transition-transform duration-300 group-hover:scale-105 ${item.badgeStyle}`}>
                     {item.badge}
                   </span>
                 </div>

@@ -16,7 +16,7 @@ export default function PricingPage() {
           Professional 24/7 call answering for plumbing and HVAC businesses.
         </p>
 
-        <div className="mx-auto mt-10 max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
+        <div className="mx-auto mt-10 max-w-md rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-blue-500/40 hover:shadow-xl hover:shadow-blue-500/10 cursor-pointer">
           <h2 className="text-xl font-semibold text-slate-900">
             AnswerKeeper
           </h2>
