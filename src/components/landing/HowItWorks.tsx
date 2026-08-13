@@ -1,21 +1,28 @@
 const steps = [
   {
     number: "01",
-    title: "Connect Your Business Number",
-description:
-  "Keep the phone number your customers already know. Incoming calls are routed to AnswerKeeper whenever your team can't answer."
+    title: "30-Second Setup",
+    description: (
+      <>
+        Turn on conditional call forwarding on your existing line (
+        <code className="rounded bg-blue-50 px-1.5 py-0.5 font-mono text-xs font-semibold text-blue border border-blue-200">
+          *71
+        </code>
+        ). No new phone numbers or complex migration required.
+      </>
+    ),
   },
   {
     number: "02",
-    title: "Every Customer Gets a Professional Response",
-description:
-  "AnswerKeeper greets callers, collects the information you need, identifies urgent service requests, and keeps the conversation professional from start to finish."
+    title: "Smart Triage & Detail Capture",
+    description:
+      "AnswerKeeper greets the caller on the 3rd ring, assesses urgency (Active Leak / No Heat vs. Routine Call), and collects all property and job details automatically.",
   },
   {
     number: "03",
-    title: "Your Team Takes It From There",
-description:
-  "Service requests, customer details, and appointment information are delivered to your team so they can respond quickly and stay focused on serving customers."
+    title: "Calendar Booking & Emergency Alert",
+    description:
+      "Standard service calls get booked directly on your Google Calendar. Urgent emergency calls trigger an immediate SMS alert straight to your cell phone.",
   },
 ];
 
@@ -25,13 +32,13 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-sm font-semibold uppercase tracking-wider text-blue">
-          How AnswerKeeper Works
+            3 Frictionless Steps
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
-          From Customer Call to Booked Job in Minutes
+            How AnswerKeeper Works
           </h2>
           <p className="mt-4 text-base leading-relaxed text-navy-muted sm:text-lg">
-          Getting started is simple. Keep your existing business number while AnswerKeeper helps you answer every customer, capture service requests, and keep your technicians informed.
+            Keep your existing business number while AnswerKeeper triages emergencies, captures job details, and fills your dispatch schedule automatically.
           </p>
         </div>
 
@@ -44,17 +51,19 @@ export function HowItWorks() {
             {steps.map((step) => (
               <li
                 key={step.number}
-                className="relative rounded-2xl border border-border bg-surface p-6 text-center md:bg-white md:text-left"
+                className="relative flex flex-col justify-between rounded-2xl border border-border bg-surface p-6 text-center md:bg-white md:text-left transition hover:border-blue-mid hover:shadow-sm"
               >
-                <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue font-[family-name:var(--font-outfit)] text-sm font-bold text-white shadow-md shadow-blue/25 md:mx-0">
-                  {step.number}
-                </span>
-                <h3 className="mt-5 font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-navy-muted">
-                  {step.description}
-                </p>
+                <div>
+                  <span className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-blue font-[family-name:var(--font-outfit)] text-sm font-bold text-white shadow-md shadow-blue/25 md:mx-0">
+                    {step.number}
+                  </span>
+                  <h3 className="mt-5 font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">
+                    {step.title}
+                  </h3>
+                  <div className="mt-2 text-sm leading-relaxed text-navy-muted">
+                    {step.description}
+                  </div>
+                </div>
               </li>
             ))}
           </ol>

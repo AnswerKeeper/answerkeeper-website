@@ -1,14 +1,12 @@
 "use client";
 
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight, Phone, Play } from "lucide-react";
 
 type HeroProps = {
   onWatchDemo?: () => void;
 };
 
 export function Hero({ onWatchDemo }: HeroProps) {
-  
-
   return (
     <section className="relative overflow-hidden">
       <div
@@ -27,44 +25,54 @@ export function Hero({ onWatchDemo }: HeroProps) {
           </p>
 
           <div className="mt-5 inline-flex items-center rounded-full border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-semibold text-blue">
-            Built for Home Service Businesses
+            Built for Plumbing &amp; HVAC Contractors
           </div>
 
           <h1 className="animate-fade-up-delay-1 mt-5 font-[family-name:var(--font-outfit)] text-3xl font-semibold leading-[1.15] tracking-tight text-navy sm:text-4xl md:text-5xl">
-            Every Customer Gets an Answer.
+            Never Lose Another $500+ Job to a Missed Call.
           </h1>
 
           <p className="animate-fade-up-delay-2 mx-auto mt-5 max-w-2xl text-base leading-relaxed text-navy-muted sm:text-lg">
-            While you&apos;re serving customers in the field, AnswerKeeper responds instantly, captures every service request, books appointments, and keeps your team informed—so you never lose work because you couldn&apos;t answer the phone.
+            A customized 24/7 phone dispatch system that triages emergencies, captures job details, and books appointments on your Google Calendar—so you never lose callers to the competition while on a job site.
           </p>
 
           <div className="animate-fade-up-delay-3 mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <a
+              href="tel:+14127252760"
+              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-blue/25 transition hover:bg-blue-dark sm:w-auto"
+            >
+              <Phone size={16} aria-hidden="true" />
+              Call Live Demo: +1 (412) 725-2760
+            </a>
+
+            <a
               href="https://tally.so/r/D49rpE"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-blue/25 transition hover:bg-blue-dark sm:w-auto"
+              className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 text-sm font-semibold text-navy transition hover:border-blue hover:text-blue sm:w-auto"
             >
-              Book a Free Demo
+              Start 14-Day Free Trial
               <ArrowRight size={16} aria-hidden="true" />
             </a>
 
-            <button
-              type="button"
-              onClick={onWatchDemo}
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 py-3 text-sm font-semibold text-navy transition hover:border-blue hover:text-blue"
-            >
-              <Play size={14} aria-hidden="true" />
-              Watch 90-Second Demo
-            </button>
+            {onWatchDemo && (
+              <button
+                type="button"
+                onClick={onWatchDemo}
+                className="inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-white px-6 text-sm font-semibold text-navy transition hover:border-blue hover:text-blue sm:w-auto"
+              >
+                <Play size={14} aria-hidden="true" />
+                Watch Demo
+              </button>
+            )}
           </div>
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-navy-muted">
             <span>✓ Built for Plumbing &amp; HVAC</span>
             <span>✓ Answers Calls 24/7</span>
             <span>✓ Works With Your Existing Number</span>
-            <span>✓ Setup in Minutes</span>
-            <span>✓ No Long-Term Contracts</span>
+            <span>✓ 14-Day Free Trial</span>
+            <span>✓ No Credit Card Required</span>
           </div>
         </div>
       </div>
@@ -129,9 +137,7 @@ function HeroProductVisual() {
               />
               <ChatBubble
                 who="AnswerKeeper"
-                text="Thanks. I've marked this as an emergency and booked the earliest available technician.
-
-                You'll receive a confirmation by text shortly."
+                text={`Thanks. I've marked this as an emergency and booked the earliest available technician.\n\nYou'll receive a confirmation by text shortly.`}
                 tone="ai"
               />
             </div>
@@ -142,11 +148,11 @@ function HeroProductVisual() {
               Appointment Confirmed
             </p>
             <div className="mt-4 space-y-3">
-            <InfoRow label="Service" value="Emergency Pipe Burst Repair" />
-            <InfoRow label="Priority" value="High — Same Night" highlight />
-            <InfoRow label="Address" value="482 Oak Street, Unit 2" />
-            <InfoRow label="Arrival Window" value="Tonight, 7:30–9:00 PM" />
-            <InfoRow label="Technician" value="Dispatch Confirmed" />
+              <InfoRow label="Service" value="Emergency Pipe Burst Repair" />
+              <InfoRow label="Priority" value="High — Same Night" highlight />
+              <InfoRow label="Address" value="482 Oak Street, Unit 2" />
+              <InfoRow label="Arrival Window" value="Tonight, 7:30–9:00 PM" />
+              <InfoRow label="Technician" value="Dispatch Confirmed" />
             </div>
             <div className="mt-6 rounded-xl border border-blue-mid bg-blue-soft px-4 py-3">
               <p className="text-sm font-semibold text-navy">
@@ -176,15 +182,16 @@ function ChatBubble({
   return (
     <div className={`flex ${isAi ? "justify-start" : "justify-end"}`}>
       <div
-        className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-left sm:max-w-[85%] ${isAi
+        className={`max-w-[92%] rounded-2xl px-3.5 py-2.5 text-left sm:max-w-[85%] ${
+          isAi
             ? "rounded-tl-md bg-blue-soft text-navy"
             : "rounded-tr-md bg-navy text-white"
-          }`}
+        }`}
       >
         <p className={`text-[11px] font-semibold ${isAi ? "text-blue" : "text-blue-mid"}`}>
           {who}
         </p>
-        <p className="mt-0.5 text-sm leading-relaxed">{text}</p>
+        <p className="mt-0.5 text-sm leading-relaxed whitespace-pre-line">{text}</p>
       </div>
     </div>
   );
@@ -203,8 +210,9 @@ function InfoRow({
     <div className="flex items-center justify-between gap-3 rounded-xl border border-border bg-white px-3.5 py-2.5">
       <span className="text-xs font-medium text-navy-soft">{label}</span>
       <span
-        className={`text-right text-sm font-semibold ${highlight ? "text-blue" : "text-navy"
-          }`}
+        className={`text-right text-sm font-semibold ${
+          highlight ? "text-blue" : "text-navy"
+        }`}
       >
         {value}
       </span>

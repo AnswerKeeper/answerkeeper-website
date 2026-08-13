@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Phone } from "lucide-react";
 
 type FinalCTAProps = {
   onWatchDemo?: () => void;
@@ -20,13 +20,12 @@ export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
 
           <div className="relative mx-auto max-w-2xl">
             <h2 className="font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-white sm:text-4xl">
-              Ready to stop missing plumbing jobs?
+              Ready to stop losing $500+ plumbing &amp; HVAC jobs?
             </h2>
             <p className="mt-4 text-base leading-relaxed text-blue-mid sm:text-lg">
-              See how AnswerKeeper answers your line, flags emergencies, and
-              books appointments—live on a free walkthrough tailored to your
-              shop.
+              Start capturing every caller, triaging emergency calls, and filling your Google Calendar automatically.
             </p>
+            
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <a
                 href="https://tally.so/r/D49rpE"
@@ -34,20 +33,23 @@ export function FinalCTA({ onWatchDemo }: FinalCTAProps) {
                 rel="noopener noreferrer"
                 className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue px-6 text-sm font-semibold text-white shadow-lg shadow-black/20 transition hover:bg-blue-dark sm:w-auto"
               >
-                Book a Free Demo
+                Start 14-Day Free Trial
                 <ArrowRight size={16} />
               </a>
-              <button
-               type="button"
-               onClick={onWatchDemo}
-               className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
+              
+              <a
+                href="tel:+14127252760"
+                className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/5 px-6 text-sm font-semibold text-white transition hover:bg-white/10 sm:w-auto"
               >
-               Watch 90-Second Demo
-              </button>
+                <Phone size={14} />
+                Call Live Demo: +1 (412) 725-2760
+              </a>
             </div>
-            <p className="mt-5 text-xs text-blue-mid/80">
-              No long contracts to start. Setup usually takes less than a day.
-            </p>
+
+            {/* Risk Reversal Banner */}
+            <div className="mt-8 inline-block rounded-full border border-white/10 bg-white/5 px-5 py-2 text-xs sm:text-sm font-medium text-blue-mid">
+              14-Day Free Trial • No Credit Card Required • Setup Takes 2 Minutes
+            </div>
           </div>
         </div>
       </div>
