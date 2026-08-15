@@ -85,7 +85,7 @@ export function RevenueCalculator() {
             <div className="mt-8 flex items-start gap-3 rounded-xl border border-amber-200 bg-amber-50/60 p-4 text-xs text-amber-900 shadow-xs transition-all duration-300 hover:border-amber-300 hover:bg-amber-50">
               <AlertCircle size={18} className="shrink-0 text-amber-600" />
               <p>
-                <strong>Did you know?</strong> 80% of residential callers hang up without leaving a voicemail if no one answers within 3 rings.
+                <strong>Did you know?</strong> Most residential callers hang up without leaving a voicemail if no one answers quickly.
               </p>
             </div>
           </div>

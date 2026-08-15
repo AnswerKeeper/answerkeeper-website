@@ -32,7 +32,7 @@ const faqs = [
   {
     question: "What if we want a human to take over?",
     answer:
-      "You can set rules to warm-transfer to a live team member during business hours, or review every transcript and recording from your dashboard after the call.",
+      "You can review every call's summary and full transcript directly—we'll get this to you right after each call. A self-serve dashboard and live warm-transfer to your team are on our roadmap.",
   },
 ];
 

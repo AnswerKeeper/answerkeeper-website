@@ -7,7 +7,7 @@ const problems = [
     badge: "Lost Revenue",
     badgeStyle: "bg-red-50 text-red-600 border-red-200",
     description:
-      "80% of homeowners with a burst pipe or broken AC won't leave a voicemail—they hang up and immediately call the next shop on Google.",
+      "Most homeowners with a burst pipe or broken AC won't leave a voicemail—they hang up and immediately call the next shop on Google.",
   },
   {
     icon: ShieldAlert,
