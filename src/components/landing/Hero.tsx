@@ -90,21 +90,21 @@ export function Hero({ onWatchDemo }: HeroProps) {
 function HeroProductVisual() {
   return (
     <div className="mx-auto max-w-5xl px-5 sm:px-8">
-      <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-white/90 shadow-[0_20px_60px_-15px_rgba(90,79,207,0.12)] backdrop-blur-xl transition-all duration-300">
+      <div className="overflow-hidden rounded-2xl border border-slate-200/80 bg-slate-950 shadow-[0_25px_70px_-15px_rgba(90,79,207,0.25)] backdrop-blur-xl transition-all duration-300">
         
         {/* Top Window Header */}
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/80 px-4 py-3">
+        <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-3">
           <div className="flex items-center gap-2">
-            <span className="h-3 w-3 rounded-full bg-slate-300" />
-            <span className="h-3 w-3 rounded-full bg-slate-300" />
-            <span className="h-3 w-3 rounded-full bg-slate-300" />
-            <span className="ml-3 text-xs font-mono font-medium text-slate-500">
+            <span className="h-3 w-3 rounded-full bg-slate-700" />
+            <span className="h-3 w-3 rounded-full bg-slate-700" />
+            <span className="h-3 w-3 rounded-full bg-slate-700" />
+            <span className="ml-3 text-xs font-mono font-medium text-slate-400">
               answerkeeper-live-dispatch
             </span>
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700 border border-emerald-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-emerald-950/60 px-2.5 py-0.5 text-[11px] font-bold text-emerald-400 border border-emerald-800/60">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
               Live Call Connected
             </span>
           </div>
@@ -113,74 +113,87 @@ function HeroProductVisual() {
         {/* Content Grid */}
         <div className="grid gap-0 lg:grid-cols-[1.1fr_0.9fr]">
           
-          {/* Left Panel: Conversation */}
-          <div className="border-b border-slate-100 p-6 sm:p-8 lg:border-b-0 lg:border-r">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-wider text-[#5A4FCF]">
-                  Incoming Call Intake
-                </p>
-                <p className="mt-1 font-[family-name:var(--font-outfit)] text-xl font-bold text-slate-900">
-                  Emergency Plumbing Request
-                </p>
-                <div className="mt-2 inline-flex items-center rounded-full bg-rose-50 border border-rose-200 px-3 py-1 text-xs font-bold text-rose-700">
-                  🚨 Same-Day Emergency
+          {/* Left Panel: Conversation (Gradient Mesh Style matching Image 1) */}
+          <div className="relative border-b border-slate-800/80 p-6 sm:p-8 lg:border-b-0 lg:border-r overflow-hidden bg-slate-950">
+            {/* Organic CSS Glows */}
+            <div aria-hidden className="pointer-events-none absolute -top-16 -left-16 h-64 w-64 rounded-full bg-rose-600/30 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute -bottom-16 -right-16 h-72 w-72 rounded-full bg-emerald-600/25 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-80 w-80 rounded-full bg-teal-500/15 blur-3xl" />
+
+            <div className="relative z-10">
+              <div className="flex items-start justify-between gap-4">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-teal-400">
+                    Incoming Call Intake
+                  </p>
+                  <p className="mt-1 font-[family-name:var(--font-outfit)] text-xl font-bold text-white">
+                    Emergency Plumbing Request
+                  </p>
+                  <div className="mt-2 inline-flex items-center rounded-full bg-rose-950/70 border border-rose-800/60 px-3 py-1 text-xs font-bold text-rose-300 backdrop-blur-md">
+                    🚨 Same-Day Emergency
+                  </div>
+                  <p className="mt-2 text-xs text-slate-300">
+                    Caller: <span className="text-white font-semibold">Maria Santos</span> · (415) 555-0182
+                  </p>
                 </div>
-                <p className="mt-2 text-xs text-slate-500">
-                  Caller: <span className="text-slate-800 font-semibold">Maria Santos</span> · (415) 555-0182
-                </p>
+
+                <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
+                  <span className="animate-ping absolute inset-0 rounded-full bg-[#5A4FCF]/40" />
+                  <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-[#5A4FCF] text-[10px] font-bold text-white shadow-md">
+                    LIVE
+                  </span>
+                </div>
               </div>
 
-              <div className="relative flex h-10 w-10 shrink-0 items-center justify-center">
-                <span className="animate-ping absolute inset-0 rounded-full bg-[#5A4FCF]/30" />
-                <span className="relative flex h-8 w-8 items-center justify-center rounded-full bg-[#5A4FCF] text-[10px] font-bold text-white shadow-md">
-                  LIVE
-                </span>
+              {/* Conversation Bubbles */}
+              <div className="mt-6 space-y-3.5">
+                <ChatBubble
+                  who="AnswerKeeper Assistant"
+                  text="Thanks for calling Apex Plumbing. I can help right away—Can you briefly describe what's happening so I can dispatch the right team?"
+                  tone="assistant"
+                />
+                <ChatBubble
+                  who="Maria (Caller)"
+                  text="A pipe burst under my kitchen sink and water is leaking everywhere!"
+                  tone="caller"
+                />
+                <ChatBubble
+                  who="AnswerKeeper Assistant"
+                  text={`Understood. I've logged this as an emergency and booked our technician for tonight between 7:30–9:00 PM.\n\nA confirmation SMS has been sent to your phone.`}
+                  tone="assistant"
+                />
               </div>
-            </div>
-
-            {/* Conversation Bubbles */}
-            <div className="mt-6 space-y-3.5">
-              <ChatBubble
-                who="AnswerKeeper Assistant"
-                text="Thanks for calling Apex Plumbing. I can help right away—Can you briefly describe what's happening so I can dispatch the right team?"
-                tone="assistant"
-              />
-              <ChatBubble
-                who="Maria (Caller)"
-                text="A pipe burst under my kitchen sink and water is leaking everywhere!"
-                tone="caller"
-              />
-              <ChatBubble
-                who="AnswerKeeper Assistant"
-                text={`Understood. I've logged this as an emergency and booked our technician for tonight between 7:30–9:00 PM.\n\nA confirmation SMS has been sent to your phone.`}
-                tone="assistant"
-              />
             </div>
           </div>
 
-          {/* Right Panel: Instant Booking Summary */}
-          <div className="bg-slate-50/60 p-6 sm:p-8 flex flex-col justify-between">
-            <div>
-              <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                Automated Dispatch Ticket
-              </p>
-              <div className="mt-4 space-y-2.5">
-                <InfoRow label="Service Type" value="Pipe Burst Emergency" />
-                <InfoRow label="Priority" value="High — Dispatch Priority" highlight />
-                <InfoRow label="Address" value="482 Oak Street, Unit 2" />
-                <InfoRow label="Arrival Window" value="Tonight, 7:30–9:00 PM" />
-                <InfoRow label="Google Calendar" value="Synced Automatically" />
-              </div>
-            </div>
+          {/* Right Panel: Instant Booking Summary (Deep Ocean Blue Style matching Image 2) */}
+          <div className="relative p-6 sm:p-8 flex flex-col justify-between overflow-hidden bg-slate-950">
+            {/* Deep Blue/Pink Accent Ambient Glows */}
+            <div aria-hidden className="pointer-events-none absolute -bottom-20 -left-10 h-80 w-80 rounded-full bg-blue-700/30 blur-3xl" />
+            <div aria-hidden className="pointer-events-none absolute top-10 -right-20 h-64 w-64 rounded-full bg-rose-500/20 blur-3xl" />
 
-            <div className="mt-6 rounded-xl border border-[#5A4FCF]/20 bg-[#5A4FCF]/5 p-4 shadow-sm">
-              <p className="text-xs font-bold text-[#5A4FCF]">
-                ⚡ $650 Service Call Secured
-              </p>
-              <p className="mt-1 text-xs leading-relaxed text-slate-700">
-                AnswerKeeper qualified the caller and booked your calendar while you were busy working.
-              </p>
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
+                  Automated Dispatch Ticket
+                </p>
+                <div className="mt-4 space-y-2.5">
+                  <InfoRow label="Service Type" value="Pipe Burst Emergency" />
+                  <InfoRow label="Priority" value="High — Dispatch Priority" highlight />
+                  <InfoRow label="Address" value="482 Oak Street, Unit 2" />
+                  <InfoRow label="Arrival Window" value="Tonight, 7:30–9:00 PM" />
+                  <InfoRow label="Google Calendar" value="Synced Automatically" />
+                </div>
+              </div>
+
+              <div className="mt-6 rounded-xl border border-purple-500/30 bg-purple-950/40 p-4 shadow-md backdrop-blur-md">
+                <p className="text-xs font-bold text-purple-300">
+                  ⚡ $650 Service Call Secured
+                </p>
+                <p className="mt-1 text-xs leading-relaxed text-slate-300">
+                  AnswerKeeper qualified the caller and booked your calendar while you were busy working.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -205,11 +218,11 @@ function ChatBubble({
       <div
         className={`max-w-[90%] rounded-2xl px-4 py-3 text-left transition-all ${
           isAssistant
-            ? "rounded-tl-xs bg-[#5A4FCF]/5 text-slate-800 border border-[#5A4FCF]/10"
-            : "rounded-tr-xs bg-slate-900 text-white shadow-xs"
+            ? "rounded-tl-xs bg-slate-900/80 text-slate-100 border border-slate-700/60 backdrop-blur-md shadow-xs"
+            : "rounded-tr-xs bg-[#5A4FCF] text-white shadow-md"
         }`}
       >
-        <p className={`text-[10px] font-bold uppercase tracking-wide ${isAssistant ? "text-[#5A4FCF]" : "text-[#5A4FCF]/60"}`}>
+        <p className={`text-[10px] font-bold uppercase tracking-wide ${isAssistant ? "text-teal-300" : "text-purple-200"}`}>
           {who}
         </p>
         <p className="mt-1 text-xs leading-relaxed whitespace-pre-line">{text}</p>
@@ -228,11 +241,11 @@ function InfoRow({
   highlight?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-200/80 bg-white px-3.5 py-2.5 shadow-2xs">
-      <span className="text-xs font-medium text-slate-500">{label}</span>
+    <div className="flex items-center justify-between gap-3 rounded-xl border border-slate-800 bg-slate-900/80 px-3.5 py-2.5 shadow-2xs backdrop-blur-md">
+      <span className="text-xs font-medium text-slate-400">{label}</span>
       <span
         className={`text-right text-xs font-bold ${
-          highlight ? "text-[#5A4FCF]" : "text-slate-800"
+          highlight ? "text-purple-400" : "text-slate-100"
         }`}
       >
         {value}
