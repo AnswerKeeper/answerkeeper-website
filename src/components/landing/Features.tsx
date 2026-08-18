@@ -56,7 +56,7 @@ export function Features() {
     <section id="features" className="border-t border-border bg-surface py-20 sm:py-28">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm font-semibold uppercase tracking-wider text-blue">
+          <p className="text-sm font-semibold uppercase tracking-wider text-[#5A4FCF]">
             Why AnswerKeeper
           </p>
           <h2 className="mt-3 font-[family-name:var(--font-outfit)] text-3xl font-semibold tracking-tight text-navy sm:text-4xl">
@@ -71,9 +71,9 @@ export function Features() {
           {features.map((feature) => (
             <article
               key={feature.title}
-              className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-blue/40 hover:shadow-xl hover:shadow-blue/10 cursor-pointer"
+              className="group rounded-2xl border border-border bg-white p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1.5 hover:border-[#5A4FCF]/40 hover:shadow-xl hover:shadow-[#5A4FCF]/10 cursor-pointer"
             >
-              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue/10 text-blue transition-colors duration-300 group-hover:bg-blue group-hover:text-white">
+              <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#5A4FCF]/10 text-[#5A4FCF] transition-colors duration-300 group-hover:bg-[#5A4FCF] group-hover:text-white">
                 <feature.icon size={20} strokeWidth={1.75} />
               </div>
               <h3 className="mt-5 font-[family-name:var(--font-outfit)] text-lg font-semibold text-navy">

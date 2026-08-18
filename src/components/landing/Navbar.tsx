@@ -38,7 +38,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-navy-muted transition-all duration-200 hover:-translate-y-0.5 hover:text-navy"
+              className="text-sm font-medium text-navy-muted transition-all duration-200 hover:-translate-y-0.5 hover:text-[#5A4FCF]"
             >
               {link.label}
             </a>
@@ -50,7 +50,7 @@ export function Navbar() {
             href="https://tally.so/r/D49rpE"
             target="_blank"
             rel="noopener noreferrer"
-            className="rounded-xl bg-blue px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-blue/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-blue-dark hover:shadow-md hover:shadow-blue/30 active:translate-y-0"
+            className="rounded-xl bg-[#5A4FCF] px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-[#5A4FCF]/25 transition-all duration-300 ease-out hover:-translate-y-0.5 hover:bg-[#5A4FCF]/90 hover:shadow-md hover:shadow-[#5A4FCF]/30 active:translate-y-0"
           >
             Book a Free Demo
           </a>
@@ -74,7 +74,7 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-navy-muted transition-colors hover:bg-surface hover:text-navy"
+                className="rounded-lg px-3 py-3 text-sm font-medium text-navy-muted transition-colors hover:bg-surface hover:text-[#5A4FCF]"
               >
                 {link.label}
               </a>
@@ -85,7 +85,7 @@ export function Navbar() {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setOpen(false)}
-              className="mt-2 rounded-xl bg-blue px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-blue-dark"
+              className="mt-2 rounded-xl bg-[#5A4FCF] px-4 py-3 text-center text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#5A4FCF]/90"
             >
               Book a Free Demo
             </a>
