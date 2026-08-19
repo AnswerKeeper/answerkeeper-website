@@ -14,7 +14,56 @@ export async function POST(req: Request) {
 
     console.log("Incoming Vapi Message Type:", message?.type);
 
-    // Handle tool-calls or function-call payload types
+    // ==========================================
+    // 1. HANDLE END-OF-CALL TELEGRAM ALERTS
+    // ==========================================
+    if (message?.type === "end-of-call-report") {
+      const call = message?.call;
+      const analysis = message?.analysis;
+      const transcript = message?.transcript;
+
+      const customerNumber = call?.customer?.number || "Unknown Number";
+      const duration = message?.durationSeconds
+        ? `${Math.round(message.durationSeconds)}s`
+        : "N/A";
+      const summary = analysis?.summary || "No call summary generated.";
+      const endedReason = message?.endedReason || "Completed";
+
+      const telegramMessage = 
+`🚨 *NEW ANSWERKEEPER DEMO CALL*
+
+📞 *Caller ID:* \`${customerNumber}\`
+⏱️ *Duration:* ${duration}
+📌 *End Reason:* ${endedReason}
+
+📋 *Call Summary:*
+${summary}
+
+💬 *Transcript Snippet:*
+_${transcript ? transcript.slice(0, 300) + "..." : "No transcript available."}_`;
+
+      const botToken = process.env.TELEGRAM_BOT_TOKEN;
+      const chatId = process.env.TELEGRAM_CHAT_ID;
+
+      if (botToken && chatId) {
+        await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: telegramMessage,
+            parse_mode: "Markdown",
+          }),
+        });
+        console.log("Telegram alert sent successfully.");
+      }
+
+      return NextResponse.json({ status: "telegram_alert_sent" }, { status: 200 });
+    }
+
+    // ==========================================
+    // 2. HANDLE TOOL CALLS (e.g. book_appointment)
+    // ==========================================
     if (message?.type === "tool-calls" || message?.type === "function-call") {
       const toolCall = message.toolCalls?.[0];
       const toolCallId = toolCall?.id || message.toolCallId || "call_default";
