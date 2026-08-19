@@ -28,13 +28,13 @@ export async function POST(req: Request) {
     }
 
     const message = await client.messages.create({
-      body: \Hi \, your dispatch request for "\" at \ has been confirmed. A technician will reach out shortly. - AnswerKeeper\,
+      body: `Hi ${name}, your dispatch request for "${issue}" at ${address} has been confirmed. A technician will reach out shortly. - AnswerKeeper`,
       from: twilioNumber,
       to: recipient,
     });
 
     return NextResponse.json({
-      results: [{ result: \SMS confirmation dispatched successfully. SID: \\ }],
+      results: [{ result: `SMS confirmation dispatched successfully. SID: ${message.sid}` }],
     });
   } catch (error: any) {
     console.error('Error sending SMS:', error);
