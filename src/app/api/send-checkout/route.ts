@@ -38,7 +38,7 @@ export async function POST(req: Request) {
     const isFreeTrial = args.is_free_trial || args.plan_type === 'trial' || args.request_type === 'trial';
 
     const tallyFormUrl = 'https://tally.so/r/D49rpE';
-    const paddleCheckoutUrl = 'https://answerkeeper.app/checkout';
+    const paddleCheckoutUrl = 'https://answerkeeper.app/pricing';
 
     const targetUrl = isFreeTrial ? tallyFormUrl : paddleCheckoutUrl;
     const messageBody = isFreeTrial
