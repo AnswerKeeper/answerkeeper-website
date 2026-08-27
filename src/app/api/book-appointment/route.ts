@@ -31,7 +31,8 @@ export async function POST(request: NextRequest) {
 
     // Support all parameter naming conventions (Vapi Schema vs Custom backend)
     const customerName = args.customerName || args.callerName || 'Valued Customer';
-    const customerPhone = args.customerPhone || args.callbackNumber || '';
+    const callerNumber = body.message?.call?.customer?.number || '';
+const customerPhone = args.customerPhone || args.callbackNumber || callerNumber;
     const address = args.address || args.serviceAddress || 'Not provided';
     const serviceType = args.serviceType || 'Service Call';
     const appointmentTime = args.appointmentTime;
