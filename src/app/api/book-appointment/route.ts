@@ -11,7 +11,6 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Print full Vapi payload structure to Vercel console
     console.log('DEBUG VAPI PAYLOAD:', JSON.stringify(body, null, 2));
 
     // 1. Extract and parse parameters from Vapi payload safely
@@ -32,8 +31,11 @@ export async function POST(request: NextRequest) {
       args = body;
     }
 
-    // Comprehensive fallback search for caller phone across all Vapi payload schemas
+    // Comprehensive fallback search for caller phone across all possible locations
     const extractedCallerPhone =
+      args.customerPhone ||
+      args.callbackNumber ||
+      args.phone ||
       body.message?.call?.customer?.number ||
       body.call?.customer?.number ||
       body.message?.customer?.number ||
@@ -43,13 +45,12 @@ export async function POST(request: NextRequest) {
       '';
 
     const customerName = args.customerName || args.callerName || 'Valued Customer';
-    const customerPhone = args.customerPhone || args.callbackNumber || extractedCallerPhone;
     const address = args.address || args.serviceAddress || 'Not provided';
     const serviceType = args.serviceType || 'Service Call';
     const appointmentTime = args.appointmentTime;
 
     // 2. Format phone number to safe E.164
-    const rawPhone = String(customerPhone);
+    const rawPhone = String(extractedCallerPhone);
     const cleaned = rawPhone.replace(/[^\d+]/g, '');
     const formattedPhone = cleaned ? (cleaned.startsWith('+') ? cleaned : `+${cleaned}`) : '';
 
@@ -67,13 +68,22 @@ export async function POST(request: NextRequest) {
     });
 
     const calendar = google.calendar({ version: 'v3', auth });
-    const startTime = appointmentTime ? new Date(appointmentTime) : new Date();
+
+    // 4. Parse Timezone Correctly (EST/EDT offset fix)
+    let startTime: Date;
+    if (appointmentTime) {
+      startTime = new Date(appointmentTime);
+    } else {
+      startTime = new Date();
+    }
+
     const endTime = new Date(startTime.getTime() + 30 * 60 * 1000);
 
     const dateStr = startTime.toLocaleDateString('en-US', { 
       weekday: 'short', 
       month: 'short', 
-      day: 'numeric' 
+      day: 'numeric',
+      timeZone: 'America/New_York'
     });
     const timeStr = startTime.toLocaleTimeString('en-US', { 
       hour: 'numeric', 
@@ -81,7 +91,7 @@ export async function POST(request: NextRequest) {
       timeZone: 'America/New_York' 
     });
 
-    // 4. Parallel execution of Calendar insertion and SMS dispatch (Optimized for Sub-Second Response)
+    // 5. Run Calendar and SMS tasks in parallel
     const promises: Promise<any>[] = [];
 
     // Task A: Insert Event into Google Calendar
@@ -91,8 +101,8 @@ export async function POST(request: NextRequest) {
         requestBody: {
           summary: `${serviceType} - ${customerName}`,
           description: `Phone: ${formattedPhone || 'Not provided'}\nAddress: ${address}`,
-          start: { dateTime: startTime.toISOString(), timeZone: 'America/New_York' },
-          end: { dateTime: endTime.toISOString(), timeZone: 'America/New_York' },
+          start: { dateTime: startTime.toISOString() },
+          end: { dateTime: endTime.toISOString() },
         },
       }).catch(err => console.error('Google Calendar Insert Failed:', err?.message || err))
     );
@@ -124,15 +134,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Execute background operations concurrently
     await Promise.allSettled(promises);
 
-    // 5. Immediate Success Response back to Vapi (<300ms target)
+    // 6. Return Sub-Second Success Response back to Vapi
     return NextResponse.json({
       results: [
         {
           toolCallId: toolCall?.id,
-          result: `Appointment successfully booked for ${customerName} on ${startTime.toLocaleString()}`,
+          result: `Appointment successfully booked for ${customerName} on ${dateStr} at ${timeStr}`,
         },
       ],
     });
