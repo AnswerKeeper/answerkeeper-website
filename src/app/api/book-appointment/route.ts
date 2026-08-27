@@ -11,6 +11,9 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
+    // Diagnostic log to catch full Vapi payload structure in Vercel logs
+    console.log('DEBUG VAPI PAYLOAD:', JSON.stringify(body, null, 2));
+
     // 1. Extract and parse parameters from Vapi payload safely
     const toolCall = body.message?.toolCalls?.[0];
     let args: any = {};
@@ -29,10 +32,18 @@ export async function POST(request: NextRequest) {
       args = body;
     }
 
-    // Support all parameter naming conventions (Vapi Schema vs Custom backend)
+    // Comprehensive fallback search for caller phone across all Vapi payload schemas
+    const extractedCallerPhone =
+      body.message?.call?.customer?.number ||
+      body.call?.customer?.number ||
+      body.message?.customer?.number ||
+      body.customer?.number ||
+      body.call?.phoneNumber ||
+      '';
+
+    // Support all parameter naming conventions
     const customerName = args.customerName || args.callerName || 'Valued Customer';
-    const callerNumber = body.message?.call?.customer?.number || '';
-const customerPhone = args.customerPhone || args.callbackNumber || callerNumber;
+    const customerPhone = args.customerPhone || args.callbackNumber || extractedCallerPhone;
     const address = args.address || args.serviceAddress || 'Not provided';
     const serviceType = args.serviceType || 'Service Call';
     const appointmentTime = args.appointmentTime;
@@ -79,30 +90,50 @@ const customerPhone = args.customerPhone || args.callbackNumber || callerNumber;
       },
     });
 
-    // 7. Send Twilio SMS Notification (Single segment under 160 chars)
-    if (process.env.TWILIO_PHONE_NUMBER && formattedPhone.length > 5) {
-      try {
-        const dateStr = startTime.toLocaleDateString('en-US', { 
-          weekday: 'short', 
-          month: 'short', 
-          day: 'numeric' 
-        });
-        const timeStr = startTime.toLocaleTimeString('en-US', { 
-          hour: 'numeric', 
-          minute: '2-digit',
-          timeZone: 'America/New_York' 
-        });
+    // 7. Send Twilio SMS Notifications (Dual Dispatch: Client & Technician)
+    if (process.env.TWILIO_PHONE_NUMBER) {
+      const dateStr = startTime.toLocaleDateString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric' 
+      });
+      const timeStr = startTime.toLocaleTimeString('en-US', { 
+        hour: 'numeric', 
+        minute: '2-digit',
+        timeZone: 'America/New_York' 
+      });
 
-        const smsMessage = `AnswerKeeper: Hi ${customerName}, your ${serviceType} appointment is booked for ${dateStr} at ${timeStr}. Address: ${address}`;
+      // A. Send SMS to Client/Caller
+      if (formattedPhone.length > 5) {
+        try {
+          const clientMsg = `AnswerKeeper: Hi ${customerName}, your ${serviceType} appointment is booked for ${dateStr} at ${timeStr}. Address: ${address}`;
+          await twilioClient.messages.create({
+            body: clientMsg.slice(0, 160),
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: formattedPhone,
+          });
+          console.log(`Client SMS successfully sent to ${formattedPhone}`);
+        } catch (smsErr: any) {
+          console.error('Client Twilio SMS Failed:', smsErr?.message || smsErr);
+        }
+      } else {
+        console.warn('Skipped Client SMS: No valid caller phone detected.');
+      }
 
-        await twilioClient.messages.create({
-          body: smsMessage.slice(0, 160),
-          from: process.env.TWILIO_PHONE_NUMBER,
-          to: formattedPhone,
-        });
-        console.log(`SMS successfully sent to ${formattedPhone}`);
-      } catch (smsErr: any) {
-        console.error('Twilio SMS Failed:', smsErr?.message || smsErr);
+      // B. Send SMS to Technician/Owner (if TECHNICIAN_PHONE_NUMBER env variable exists)
+      const techPhone = process.env.TECHNICIAN_PHONE_NUMBER;
+      if (techPhone) {
+        try {
+          const techMsg = `NEW BOOKING: ${serviceType} for ${customerName}. Time: ${dateStr} at ${timeStr}. Address: ${address}. Phone: ${formattedPhone || 'Not provided'}`;
+          await twilioClient.messages.create({
+            body: techMsg.slice(0, 160),
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: techPhone,
+          });
+          console.log(`Technician SMS successfully sent to ${techPhone}`);
+        } catch (techSmsErr: any) {
+          console.error('Technician Twilio SMS Failed:', techSmsErr?.message || techSmsErr);
+        }
       }
     }
 
