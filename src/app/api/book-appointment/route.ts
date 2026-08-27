@@ -11,7 +11,7 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
 
-    // Diagnostic log to catch full Vapi payload structure in Vercel logs
+    // Print full Vapi payload structure to Vercel console
     console.log('DEBUG VAPI PAYLOAD:', JSON.stringify(body, null, 2));
 
     // 1. Extract and parse parameters from Vapi payload safely
@@ -39,9 +39,9 @@ export async function POST(request: NextRequest) {
       body.message?.customer?.number ||
       body.customer?.number ||
       body.call?.phoneNumber ||
+      body.phoneNumber ||
       '';
 
-    // Support all parameter naming conventions
     const customerName = args.customerName || args.callerName || 'Valued Customer';
     const customerPhone = args.customerPhone || args.callbackNumber || extractedCallerPhone;
     const address = args.address || args.serviceAddress || 'Not provided';
@@ -53,14 +53,13 @@ export async function POST(request: NextRequest) {
     const cleaned = rawPhone.replace(/[^\d+]/g, '');
     const formattedPhone = cleaned ? (cleaned.startsWith('+') ? cleaned : `+${cleaned}`) : '';
 
-    // 3. Format Google Private Key
+    // 3. Setup Google Calendar Auth
     let rawKey = process.env.GOOGLE_PRIVATE_KEY || '';
     if (rawKey.startsWith('"') && rawKey.endsWith('"')) {
       rawKey = rawKey.slice(1, -1);
     }
     const privateKey = rawKey.replace(/\\n/g, '\n');
 
-    // 4. Authenticate Google Calendar API
     const auth = new google.auth.JWT({
       email: process.env.GOOGLE_CLIENT_EMAIL,
       key: privateKey,
@@ -68,76 +67,67 @@ export async function POST(request: NextRequest) {
     });
 
     const calendar = google.calendar({ version: 'v3', auth });
-
-    // 5. Parse Appointment Time & Duration
     const startTime = appointmentTime ? new Date(appointmentTime) : new Date();
     const endTime = new Date(startTime.getTime() + 30 * 60 * 1000);
 
-    // 6. Insert Event into Google Calendar
-    await calendar.events.insert({
-      calendarId: process.env.GOOGLE_CALENDAR_ID,
-      requestBody: {
-        summary: `${serviceType} - ${customerName}`,
-        description: `Phone: ${formattedPhone || 'Not provided'}\nAddress: ${address}`,
-        start: { 
-          dateTime: startTime.toISOString(),
-          timeZone: 'America/New_York'
-        },
-        end: { 
-          dateTime: endTime.toISOString(),
-          timeZone: 'America/New_York'
-        },
-      },
+    const dateStr = startTime.toLocaleDateString('en-US', { 
+      weekday: 'short', 
+      month: 'short', 
+      day: 'numeric' 
+    });
+    const timeStr = startTime.toLocaleTimeString('en-US', { 
+      hour: 'numeric', 
+      minute: '2-digit',
+      timeZone: 'America/New_York' 
     });
 
-    // 7. Send Twilio SMS Notifications (Dual Dispatch: Client & Technician)
-    if (process.env.TWILIO_PHONE_NUMBER) {
-      const dateStr = startTime.toLocaleDateString('en-US', { 
-        weekday: 'short', 
-        month: 'short', 
-        day: 'numeric' 
-      });
-      const timeStr = startTime.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit',
-        timeZone: 'America/New_York' 
-      });
+    // 4. Parallel execution of Calendar insertion and SMS dispatch (Optimized for Sub-Second Response)
+    const promises: Promise<any>[] = [];
 
-      // A. Send SMS to Client/Caller
-      if (formattedPhone.length > 5) {
-        try {
-          const clientMsg = `AnswerKeeper: Hi ${customerName}, your ${serviceType} appointment is booked for ${dateStr} at ${timeStr}. Address: ${address}`;
-          await twilioClient.messages.create({
-            body: clientMsg.slice(0, 160),
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: formattedPhone,
-          });
-          console.log(`Client SMS successfully sent to ${formattedPhone}`);
-        } catch (smsErr: any) {
-          console.error('Client Twilio SMS Failed:', smsErr?.message || smsErr);
-        }
-      } else {
-        console.warn('Skipped Client SMS: No valid caller phone detected.');
-      }
+    // Task A: Insert Event into Google Calendar
+    promises.push(
+      calendar.events.insert({
+        calendarId: process.env.GOOGLE_CALENDAR_ID,
+        requestBody: {
+          summary: `${serviceType} - ${customerName}`,
+          description: `Phone: ${formattedPhone || 'Not provided'}\nAddress: ${address}`,
+          start: { dateTime: startTime.toISOString(), timeZone: 'America/New_York' },
+          end: { dateTime: endTime.toISOString(), timeZone: 'America/New_York' },
+        },
+      }).catch(err => console.error('Google Calendar Insert Failed:', err?.message || err))
+    );
 
-      // B. Send SMS to Technician/Owner (if TECHNICIAN_PHONE_NUMBER env variable exists)
-      const techPhone = process.env.TECHNICIAN_PHONE_NUMBER;
-      if (techPhone) {
-        try {
-          const techMsg = `NEW BOOKING: ${serviceType} for ${customerName}. Time: ${dateStr} at ${timeStr}. Address: ${address}. Phone: ${formattedPhone || 'Not provided'}`;
-          await twilioClient.messages.create({
-            body: techMsg.slice(0, 160),
-            from: process.env.TWILIO_PHONE_NUMBER,
-            to: techPhone,
-          });
-          console.log(`Technician SMS successfully sent to ${techPhone}`);
-        } catch (techSmsErr: any) {
-          console.error('Technician Twilio SMS Failed:', techSmsErr?.message || techSmsErr);
-        }
-      }
+    // Task B: Send SMS to Client
+    if (process.env.TWILIO_PHONE_NUMBER && formattedPhone.length > 5) {
+      const clientMsg = `AnswerKeeper: Hi ${customerName}, your ${serviceType} appointment is booked for ${dateStr} at ${timeStr}. Address: ${address}`;
+      promises.push(
+        twilioClient.messages.create({
+          body: clientMsg.slice(0, 160),
+          from: process.env.TWILIO_PHONE_NUMBER,
+          to: formattedPhone,
+        }).then(() => console.log(`Client SMS sent to ${formattedPhone}`))
+          .catch(err => console.error('Client SMS Failed:', err?.message || err))
+      );
     }
 
-    // 8. Return Success to Vapi
+    // Task C: Send SMS to Technician
+    const techPhone = process.env.TECHNICIAN_PHONE_NUMBER;
+    if (process.env.TWILIO_PHONE_NUMBER && techPhone) {
+      const techMsg = `NEW BOOKING: ${serviceType} for ${customerName}. Time: ${dateStr} at ${timeStr}. Address: ${address}. Phone: ${formattedPhone || 'Not provided'}`;
+      promises.push(
+        twilioClient.messages.create({
+          body: techMsg.slice(0, 160),
+          from: process.env.TWILIO_PHONE_NUMBER,
+          to: techPhone,
+        }).then(() => console.log(`Technician SMS sent to ${techPhone}`))
+          .catch(err => console.error('Technician SMS Failed:', err?.message || err))
+      );
+    }
+
+    // Execute background operations concurrently
+    await Promise.allSettled(promises);
+
+    // 5. Immediate Success Response back to Vapi (<300ms target)
     return NextResponse.json({
       results: [
         {
